@@ -3,7 +3,7 @@ package model.facade;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import domain.DB.Categories;
+import model.db.Categories;
 import model.domain.Categorie;
 
 public class Service extends Observable{

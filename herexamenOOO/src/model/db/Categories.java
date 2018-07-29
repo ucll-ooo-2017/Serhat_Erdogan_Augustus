@@ -1,4 +1,4 @@
-package domain.DB;
+package model.db;
 
 import java.util.ArrayList;
 
