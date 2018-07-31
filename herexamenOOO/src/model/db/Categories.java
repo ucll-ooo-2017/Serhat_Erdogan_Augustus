@@ -15,12 +15,12 @@ public class Categories {
 	public void addCategorie(Categorie categorie) {
 
 		if (categorie == null) {
-			throw new DBException("The categorie can not be empty!");
+			throw new DbException("The categorie can not be null!");
 		} else {
 			for (Categorie cat : this.categories) {
-				if (cat.getName().equals(categorie.getName())
+				if (cat.getTitle().equals(categorie.getTitle())
 						&& cat.getDescription().equals(categorie.getDescription())) {
-					throw new DBException("This categorie already exist!");
+					throw new DbException("This categorie already exist!");
 				}
 			}
 		}
@@ -28,19 +28,19 @@ public class Categories {
 	}
 
 	public void deleteCategorie(Categorie categorie){
-		this.categories.remove(categorie.getName());
+		this.categories.remove(categorie.getTitle());
 	}
 	
 	public Categorie getCategorie(String name){
 		
 		Categorie result = null;
 		for(Categorie cat:this.categories){
-			if(cat.getName()==name){
+			if(cat.getTitle()==name){
 				result = cat;
 			}
 		}
 		if(result ==null ){
-			throw new DBException("Categorie was not found!");
+			throw new DbException("Categorie was not found!");
 		}else{
 			return result;
 		}

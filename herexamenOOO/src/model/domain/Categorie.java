@@ -2,28 +2,35 @@ package model.domain;
 
 public class Categorie {
 
-	private String name;
+	private String title;
 	private String description;
+	private boolean mainCategorie;
 	
 	
-	public Categorie(String name, String description){
-		setName(name);
+	public Categorie(String title, String description,boolean mainCategorie){
+		setTitle(title);
 		setDescription(description);
+		this.mainCategorie =mainCategorie;
 	}
 	
-	public String getName() {
-		return name;
+	
+	public String getTitle() {
+		return title;
 	}
 	
 	public String getDescription() {
 		return description;
 	}
 	
-	public void setName(String name) {
-		if(name == null || name.isEmpty()){
+	public Boolean getMainCategorie(){
+		return this.mainCategorie;
+	}
+	
+	public void setTitle(String title) {
+		if(title == null || title.isEmpty()){
 			throw new DomainException("Name can not be empty!");
 		}
-		this.name = name;
+		this.title = title;
 	}
 	
 	public void setDescription(String description) {

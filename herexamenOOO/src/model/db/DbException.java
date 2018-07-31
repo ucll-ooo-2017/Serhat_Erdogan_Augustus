@@ -1,6 +1,6 @@
 package model.db;
 
-public class DBException extends RuntimeException {
+public class DbException extends RuntimeException {
 
 	/**
 	 * 
@@ -8,11 +8,11 @@ public class DBException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	
-	public DBException(){
+	public DbException(){
 		super();
 	}
 	
-	public DBException(String message)
+	public DbException(String message)
 	{
 		super(message);
 	}
