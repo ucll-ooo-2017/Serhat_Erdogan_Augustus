@@ -4,7 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import controller.CategoryController;
+import controller.Controller;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,10 +20,10 @@ import javafx.scene.layout.GridPane;
 public class CategoryOverviewPane extends GridPane {
 	private TableView table;
 	private Button btnNew;
-	private CategoryController controller;
+	private Controller controller;
 
-	public CategoryOverviewPane() {
-		controller = new CategoryController();
+	public CategoryOverviewPane(Controller controller) {
+		this.controller = controller;
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setVgap(5);
 		this.setHgap(5);

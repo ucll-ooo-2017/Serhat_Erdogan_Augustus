@@ -8,14 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.domain.Categorie;
+import model.domain.Question;
 import model.facade.Service;
 import view.panels.CategoryDetailPane;
+import view.panels.QuestionDetailPane;
 
-public class CategoryController implements Observer{
+public class Controller implements Observer{
 	private final Service service;
 	private Stage stage;
 	
-	public CategoryController() {
+	public Controller() {
 		service = new Service();
 		service.addObserver(this);
 		this.stage = new Stage();
@@ -54,9 +56,33 @@ public class CategoryController implements Observer{
 		stage.show();
 	}
 	public void closeCatergoryDetail(){
-		System.out.println("1111111111");
 		this.stage.close();
 	}
+	
+	
+	//questionController
+	public void addQuestion(String question, String statement, ArrayList<String> statements, String categorie,
+			String feedback) {
+		Question ques = new Question(question, statement, statements, categorie, feedback);
+		service.addQuestion(ques);
+		closeQuestionDetail();
+	}
+	
+	public ArrayList<Question> getQuestion(){
+		return service.getQuestions();
+	}
+	
+	public void startQuestionDetail(){
+		this.stage = new Stage();
+		GridPane view = new QuestionDetailPane(this,stage);
+		Scene scene = new Scene(view);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void closeQuestionDetail(){
+		this.stage.close();
+	}
+	
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {

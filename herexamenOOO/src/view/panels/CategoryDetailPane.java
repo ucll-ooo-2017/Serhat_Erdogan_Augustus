@@ -5,7 +5,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
-import controller.CategoryController;
+import controller.Controller;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,9 +25,9 @@ public class CategoryDetailPane extends GridPane {
 	private Button btnOK, btnCancel;
 	private TextField titleField, descriptionField;
 	private ComboBox<String> categoryField;
-	private CategoryController controller;
+	private Controller controller;
 
-	public CategoryDetailPane(CategoryController controller, Stage stage) {
+	public CategoryDetailPane(Controller controller, Stage stage) {
 		this.controller = controller;
 		
 		this.setPrefHeight(150);

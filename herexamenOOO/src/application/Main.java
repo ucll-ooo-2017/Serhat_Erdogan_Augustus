@@ -1,5 +1,6 @@
 package application;
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -18,9 +19,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane();
+			Controller controller = new Controller();
+			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane(controller);
 
-			CategoryOverviewPane categoryOverviewPanel = new CategoryOverviewPane();
+			CategoryOverviewPane categoryOverviewPanel = new CategoryOverviewPane(controller);
 
 			TestPane testPane = new TestPane();
 			MessagePane messagePane = new MessagePane();
