@@ -12,7 +12,11 @@ public class Categorie {
 		setDescription(description);
 		this.mainCategorie =mainCategorie;
 	}
-	
+	public Categorie(String title, String description){
+		setTitle(title);
+		setDescription(description);
+		this.mainCategorie =true;
+	}
 	
 	public String getTitle() {
 		return title;

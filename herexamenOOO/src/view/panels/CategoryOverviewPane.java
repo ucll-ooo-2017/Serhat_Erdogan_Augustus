@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import controller.Controller;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,18 +31,28 @@ public class CategoryOverviewPane extends GridPane {
 
 		this.add(new Label("Categories:"), 0, 0, 1, 1);
 
-		table = new TableView<>();
-		table.setPrefWidth(REMAINING);
+
 		
-		TableColumn<List,String> nameCol = new TableColumn<List,String>("Name");
-		nameCol.setCellValueFactory(new PropertyValueFactory("title"));
-		table.getColumns().add(nameCol);
+		//CATEGORY OVERVIEW
+		TableColumn nameCol= new TableColumn<>("Name");
 		TableColumn descriptionCol = new TableColumn<>("description");
+
+		nameCol.setCellValueFactory(new PropertyValueFactory("title"));
 		descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));		
-		table.getColumns().add(descriptionCol);
+
+		
+		table = new TableView<String>();
+		table.setPrefWidth(REMAINING);
+		table.setItems(controller.getCategorie());
+		table.getColumns().addAll(nameCol,descriptionCol);
+
+		
 		
 		this.add(table, 0, 1, 2, 6);
 
+		
+		
+		//ADD NEW BUTTON
 		btnNew = new Button("New");
 		btnNew.setOnAction(new setNewAction());
 		this.add(btnNew, 0, 11, 1, 1);
