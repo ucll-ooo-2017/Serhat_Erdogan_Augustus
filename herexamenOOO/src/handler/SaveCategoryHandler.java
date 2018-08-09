@@ -32,7 +32,7 @@ public class SaveCategoryHandler implements EventHandler<ActionEvent> {
 			String title = categoryDetailPane.getTitle();
 			String description = categoryDetailPane.getDescription();
 			Boolean mainCategory = categoryDetailPane.isMainCategory();
-			controller.AddCategorie(title, description, mainCategory);
+			controller.AddCategory(title, description, mainCategory);
 			categoryDetailPane.emptyFields();
 			stage.close();
 			categoryOverviewPane.refreshTable();

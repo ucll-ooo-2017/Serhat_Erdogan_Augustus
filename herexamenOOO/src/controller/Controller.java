@@ -36,8 +36,8 @@ public class Controller implements Observer {
 		Question question1 = new Question("Waarom ben ik hier?", "Daarom", statements, "Java", "Zwijg gwn");
 		Question question2 = new Question("Hoe oud ben je?", "Daarom", statements, "Java", "Zwijg gwn");
 		Question question3 = new Question("hoe laat is het?", "Daarom", statements, "Java", "Zwijg gwn");
-		service.addCategorie(cat1);
-		service.addCategorie(cat2);
+		service.addCategory(cat1);
+		service.addCategory(cat2);
 		service.addQuestion(question1);
 		service.addQuestion(question2);
 		service.addQuestion(question3);
@@ -48,9 +48,9 @@ public class Controller implements Observer {
 		return this.service;
 	}
 
-	public void AddCategorie(String name, String description, boolean mainCategorie) {
+	public void AddCategory(String name, String description, boolean mainCategorie) {
 		Category categorie = new Category(name, description, mainCategorie);
-		this.service.addCategorie(categorie);
+		this.service.addCategory(categorie);
 
 	}
 

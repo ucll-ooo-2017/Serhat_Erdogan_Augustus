@@ -18,7 +18,7 @@ public class Service extends Observable{
 		this.questions = new Questions();
 	}
 	
-	public void addCategorie(Category categorie){
+	public void addCategory(Category categorie){
 		this.categories.addCategorie(categorie);
 		this.setChanged();
 		this.notifyObservers(this);
