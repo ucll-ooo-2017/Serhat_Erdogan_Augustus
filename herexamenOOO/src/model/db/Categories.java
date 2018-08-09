@@ -31,7 +31,7 @@ public class Categories {
 		this.categories.remove(categorie.getTitle());
 	}
 	
-	public Category getCategorie(String name){
+	public Category getCategory(String name){
 		
 		Category result = null;
 		for(Category cat:this.categories){

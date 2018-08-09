@@ -46,11 +46,12 @@ public class Questions {
 	
 	public ArrayList<String> getCorrectAnwsers(){
 		ArrayList<String> correctAnwsers = new ArrayList<>();
-		for(Question ques:this.questions){
+		for(Question ques: this.questions){
 			correctAnwsers.add(ques.getStatements().get(0));
 		}
 		return correctAnwsers;
 	}
+	
 	
 	public int getSizeQuestion(){
 		return this.questions.size();

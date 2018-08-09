@@ -1,6 +1,7 @@
 package view.panels;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import controller.Controller;
@@ -21,7 +22,6 @@ public class TestPane extends GridPane {
 	private Controller controller;
 	private int i = 1;
 
-
 	public TestPane(Controller controller) {
 		this.controller = controller;
 		this.setPrefHeight(300);
@@ -37,8 +37,9 @@ public class TestPane extends GridPane {
 		add(questionField, 0, 0, 1, 1);
 
 		statementGroup = new ToggleGroup();
-
-		for (String s : controller.getStatements(questionField.getText())) {
+		ArrayList<String> stats = controller.getStatements(questionField.getText());
+		Collections.shuffle(stats);
+		for (String s : stats) {
 
 			RadioButton rb1 = new RadioButton(s);
 			rb1.setToggleGroup(statementGroup);
@@ -47,24 +48,29 @@ public class TestPane extends GridPane {
 			i++;
 		}
 		
+
 		submitButton = new Button("Submit");
-		add(submitButton, 0, i+1, 1, 1);
+		add(submitButton, 0, i + 1, 1, 1);
 	}
-	
 
 	public void setProcessAnswerAction(EventHandler<ActionEvent> processAnswerAction) {
 		submitButton.setOnAction(processAnswerAction);
 	}
 
-	public String getAnwser(){
+	public String getAnwser() {
 		return statementGroup.getSelectedToggle().getUserData().toString();
 	}
-	
+
 	public List<String> getSelectedStatements() {
 		List<String> selected = new ArrayList<String>();
 		if (statementGroup.getSelectedToggle() != null) {
 			selected.add(statementGroup.getSelectedToggle().getUserData().toString());
 		}
 		return selected;
+	}
+
+	public int getTotalScore() {
+		return 0;
+
 	}
 }

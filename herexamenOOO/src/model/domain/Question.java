@@ -35,7 +35,7 @@ public class Question {
 		return Statements;
 	}
 	
-	public String getCategorie() {
+	public String getCategory() {
 		return category;
 	}
 	

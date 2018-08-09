@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -29,10 +30,21 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 
 		try {
 			System.out.println(testpane.getAnwser());
-
-			if(controller.lastQuestion()){
-				System.out.println("last question");
+			controller.getScore().controlAnwser(testpane.getAnwser());
+			
+			
+			if(controller.getScore().isLastQuestion()){
 				stage.close();
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resultaat");
+				alert.setContentText(controller.getScore().toString());
+				alert.showAndWait();
+				
+				Alert feedback = new Alert(AlertType.INFORMATION);
+				feedback.setTitle("Feedback");
+				feedback.setContentText(controller.getScore().toStringFeedback());
+				feedback.showAndWait();
+				
 			}else{
 				stage.close();
 				Stage stage = new Stage();

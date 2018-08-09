@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.domain.Category;
 import model.domain.Question;
+import model.domain.Score;
 import model.facade.Service;
 import view.panels.CategoryDetailPane;
 import view.panels.QuestionDetailPane;
@@ -99,17 +100,8 @@ public class Controller implements Observer {
 		return question;
 	}
 
-	public Boolean lastQuestion() {
-		if (questionNumber == getQuestions().size()) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
-	public Boolean submitAnwser() {
-		return true;
+	public ArrayList<String> getCorrectAnswers() {
+		return service.getCorrectAnswers();
 	}
 
 	public ArrayList<String> getStatements(String question) {
@@ -126,4 +118,13 @@ public class Controller implements Observer {
 	public void update(Observable arg0, Object arg1) {
 
 	}
+
+	public void newTest() {
+		service.newTest();
+	}
+
+	public Score getScore() {
+		return service.getScore();
+	}
+
 }

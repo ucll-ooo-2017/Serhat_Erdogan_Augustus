@@ -29,6 +29,7 @@ public class StartTestHandler implements EventHandler<ActionEvent> {
 			Scene scene = new Scene(new GridPane());
 			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", "There are no question! Try to make questions first before taking the test...");
 		} else {
+			controller.newTest();
 			this.stage = new Stage();
 			BorderPane pane = new BorderPane();
 			pane.setCenter(testPane);

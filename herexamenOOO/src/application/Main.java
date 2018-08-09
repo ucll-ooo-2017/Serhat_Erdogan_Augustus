@@ -34,11 +34,12 @@ public class Main extends Application {
 			TestPane testpane = new TestPane(controller);
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPanel, questionOverviewPane);
 			borderPane.prefHeightProperty().bind(scene.heightProperty());
 			borderPane.prefWidthProperty().bind(scene.widthProperty());
-
+			
 			root.getChildren().add(borderPane);
 			primaryStage.setScene(scene);
 			primaryStage.sizeToScene();

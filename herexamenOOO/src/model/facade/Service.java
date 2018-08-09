@@ -7,15 +7,18 @@ import model.db.Categories;
 import model.db.Questions;
 import model.domain.Category;
 import model.domain.Question;
+import model.domain.Score;
 
 public class Service extends Observable{
 
 	private Categories categories;
 	private Questions questions;
+	private Score score;
 	
 	public Service(){
 		this.categories = new Categories();
 		this.questions = new Questions();
+		
 	}
 	
 	public void addCategory(Category categorie){
@@ -50,5 +53,16 @@ public class Service extends Observable{
 		return questions.getQuestions();
 	}
 
+	public ArrayList<String> getCorrectAnswers(){
+		return questions.getCorrectAnwsers();
+	}
+
+	public void newTest() {
+		score = new Score(this.getCategories(),this.getQuestions());
+	}
+	
+	public Score getScore(){
+		return score;
+	}
 	
 }
