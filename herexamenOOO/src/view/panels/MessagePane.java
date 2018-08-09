@@ -31,16 +31,13 @@ public class MessagePane extends GridPane {
         this.setHgap(5);
         
 		testButton = new Button("Evaluate");
-		testButton.setOnAction(new EventHandler<ActionEvent>() { //TODO remove or generalize
-			
-		@Override
-		public void handle(ActionEvent event) {
-			controller.startTest();
-			}
 		
-		});
 		add(testButton, 0,1,1,1);
 		setHalignment(testButton, HPos.CENTER);
+	}
+	
+	public void setStartAction(EventHandler<ActionEvent> startAction) {
+		testButton.setOnAction(startAction);
 	}
 	
 	

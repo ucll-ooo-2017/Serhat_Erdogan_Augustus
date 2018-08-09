@@ -11,7 +11,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import view.panels.CategoryOverviewPane.setNewAction;
 
 public class QuestionOverviewPane extends GridPane {
 	private TableView table;
@@ -28,25 +27,29 @@ public class QuestionOverviewPane extends GridPane {
 		
 		table = new TableView<>();
 		table.setPrefWidth(REMAINING);
-        TableColumn nameCol = new TableColumn<>("Question");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("question"));
-        table.getColumns().add(nameCol);
-        TableColumn descriptionCol = new TableColumn<>("Category");
-        descriptionCol.setCellValueFactory(new PropertyValueFactory("category"));
-        table.getColumns().add(descriptionCol);
+        TableColumn questionCol = new TableColumn<>("Question");
+        TableColumn categoryCol = new TableColumn<>("Category");
+
+        questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory("category"));
+		
+        table.setItems(controller.getQuestionsObservable());
+		table.getColumns().addAll(questionCol,categoryCol);
 		this.add(table, 0, 1, 2, 6);
 		
 		btnNew = new Button("New");
-		btnNew.setOnAction(new setNewAction());
 		this.add(btnNew, 0, 11, 1, 1);
 	}
 	
-	class setNewAction implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent event) {
-			controller.startQuestionDetail();
-		}
+	public void refreshTable(){
+		table.getItems().clear();
+		table.setItems(controller.getQuestionsObservable());
 	}
+	
+	public void setNewAction(EventHandler<ActionEvent> newAction) {
+		btnNew.setOnAction(newAction);
+	}
+	
 	
 	public void setEditAction(EventHandler<MouseEvent> editAction) {
 		table.setOnMouseClicked(editAction);

@@ -27,12 +27,12 @@ public class CategoryDetailPane extends GridPane {
 	private ComboBox<String> categoryField;
 	private Controller controller;
 
-	public CategoryDetailPane(Controller controller, Stage stage) {
+	public CategoryDetailPane(Controller controller) {
 		this.controller = controller;
-		
+
 		this.setPrefHeight(150);
 		this.setPrefWidth(300);
-		
+
 		this.setPadding(new Insets(5, 5, 5, 5));
 		this.setVgap(5);
 		this.setHgap(5);
@@ -47,49 +47,48 @@ public class CategoryDetailPane extends GridPane {
 
 		this.add(new Label("Main Category:"), 0, 2, 1, 1);
 		categoryField = new ComboBox<String>();
-		categoryField.getItems().addAll("Main","Sub");
+		categoryField.setValue("Main");
+		categoryField.getItems().addAll("Main", "Sub");
 		this.add(categoryField, 1, 2, 1, 1);
 
 		btnCancel = new Button("Cancel");
-		btnCancel.setOnAction(new setCancelAction());
 		this.add(btnCancel, 0, 3, 1, 1);
 
 		btnOK = new Button("Save");
 		btnOK.isDefaultButton();
-		btnOK.setOnAction(new setSaveAction());
 		this.add(btnOK, 1, 3, 1, 1);
-		
-	}
-	
-	class setSaveAction implements EventHandler<ActionEvent> {
 
-		@Override
-		public void handle(ActionEvent arg0) {
-			try{
-			String title = titleField.getText();
-			String description = descriptionField.getText();
-			controller.AddCategorie(title, description, true);
-			} catch (Exception e) {
-				Scene scene = new Scene(new GridPane());
-				showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
-			}
-		}
-	}
-	
-	
-	class setCancelAction implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent event) {
-		controller.closeCatergoryDetail();
-		}
 	}
 
-	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
-		Alert alert = new Alert(alertType);
-		alert.setTitle(title);
-		alert.setHeaderText(null);
-		alert.setContentText(message);
-		alert.initOwner(owner);
-		alert.show();
+	public void setSaveAction(EventHandler<ActionEvent> saveAction) {
+		btnOK.setOnAction(saveAction);
 	}
+
+	public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
+		btnCancel.setOnAction(cancelAction);
+	}
+
+	public String getTitle() {
+		return titleField.getText();
+	}
+
+	public String getDescription() {
+		return descriptionField.getText();
+	}
+
+	public Boolean isMainCategory() {
+		System.out.println(categoryField.getValue() );
+		if (categoryField.getValue() == "Main") {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void emptyFields() {
+		titleField.clear();
+		descriptionField.clear();
+		categoryField.setValue("Main");
+	}
+
 }

@@ -2,22 +2,22 @@ package model.db;
 
 import java.util.ArrayList;
 
-import model.domain.Categorie;
+import model.domain.Category;
 
 public class Categories {
 
-	private ArrayList<Categorie> categories;
+	private ArrayList<Category> categories;
 
 	public Categories() {
-		this.categories = new ArrayList<Categorie>();
+		this.categories = new ArrayList<Category>();
 	}
 
-	public void addCategorie(Categorie categorie) {
+	public void addCategorie(Category categorie) {
 
 		if (categorie == null) {
 			throw new DbException("The categorie can not be null!");
 		} else {
-			for (Categorie cat : this.categories) {
+			for (Category cat : this.categories) {
 				if (cat.getTitle().equals(categorie.getTitle())
 						&& cat.getDescription().equals(categorie.getDescription())) {
 					throw new DbException("This categorie already exist!");
@@ -27,14 +27,14 @@ public class Categories {
 		this.categories.add(categorie);
 	}
 
-	public void deleteCategorie(Categorie categorie){
+	public void deleteCategorie(Category categorie){
 		this.categories.remove(categorie.getTitle());
 	}
 	
-	public Categorie getCategorie(String name){
+	public Category getCategorie(String name){
 		
-		Categorie result = null;
-		for(Categorie cat:this.categories){
+		Category result = null;
+		for(Category cat:this.categories){
 			if(cat.getTitle()==name){
 				result = cat;
 			}
@@ -50,7 +50,7 @@ public class Categories {
 		return this.categories.size();
 	}
 	
-	public ArrayList<Categorie> getCategories(){
+	public ArrayList<Category> getCategories(){
 		return categories;
 	}
 }

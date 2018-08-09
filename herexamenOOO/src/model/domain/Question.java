@@ -8,17 +8,17 @@ public class Question {
 	private String question;
 	private String Statement;
 	private ArrayList<String> Statements = new ArrayList<>();
-	private String categorie;
+	private String category;
 	private String feedback;
 	
 	
-	public Question(String question, String statement, ArrayList<String> statements, String categorie,
+	public Question(String question, String statement, ArrayList<String> statements, String category,
 			String feedback) {
 		
 		setQuestion(question);
 		setStatement(statement);		
 		Statements = statements;
-		setCategorie(categorie);
+		setCategory(category);
 		setFeedback(feedback);	
 }
 
@@ -36,7 +36,7 @@ public class Question {
 	}
 	
 	public String getCategorie() {
-		return categorie;
+		return category;
 	}
 	
 	public String getFeedback() {
@@ -57,11 +57,11 @@ public class Question {
 		Statement = statement;
 	}
 	
-	public void setCategorie(String categorie) {
-		if(categorie ==null){
+	public void setCategory(String category) {
+		if(category ==null){
 			throw new DomainException("You have to chose a Categorie!");
 		}
-		this.categorie = categorie;
+		this.category = category;
 	}
 	
 	public void setFeedback(String feedback) {

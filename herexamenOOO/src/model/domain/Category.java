@@ -1,21 +1,21 @@
 package model.domain;
 
-public class Categorie {
+public class Category {
 
 	private String title;
 	private String description;
-	private boolean mainCategorie;
+	private boolean mainCategory;
 	
 	
-	public Categorie(String title, String description,boolean mainCategorie){
+	public Category(String title, String description,boolean mainCategorie){
 		setTitle(title);
 		setDescription(description);
-		this.mainCategorie =mainCategorie;
+		this.mainCategory =mainCategorie;
 	}
-	public Categorie(String title, String description){
+	public Category(String title, String description){
 		setTitle(title);
 		setDescription(description);
-		this.mainCategorie =true;
+		this.mainCategory =true;
 	}
 	
 	public String getTitle() {
@@ -26,8 +26,8 @@ public class Categorie {
 		return description;
 	}
 	
-	public Boolean getMainCategorie(){
-		return this.mainCategorie;
+	public Boolean getMainCategory(){
+		return this.mainCategory;
 	}
 	
 	public void setTitle(String title) {
@@ -43,4 +43,5 @@ public class Categorie {
 		}
 		this.description = description;
 	}
+	
 }

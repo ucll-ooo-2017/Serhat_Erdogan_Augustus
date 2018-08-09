@@ -20,8 +20,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import view.panels.CategoryDetailPane.setCancelAction;
-import view.panels.CategoryDetailPane.setSaveAction;
 
 public class QuestionDetailPane extends GridPane {
 	private Button btnOK, btnCancel;
@@ -33,7 +31,7 @@ public class QuestionDetailPane extends GridPane {
 	private ArrayList<String> statements;
 	private int i;
 
-	public QuestionDetailPane(Controller controller, Stage stage) {
+	public QuestionDetailPane(Controller controller) {
 		i = 0;
 		this.controller = controller;
 		statements = new ArrayList<>();
@@ -84,48 +82,62 @@ public class QuestionDetailPane extends GridPane {
 
 		btnCancel = new Button("Cancel");
 		btnCancel.setText("Cancel");
-		btnCancel.setOnAction(new setCancelAction());
 		add(btnCancel, 0, 11, 1, 1);
 
 		btnOK = new Button("Save");
 		btnOK.isDefaultButton();
 		btnOK.setText("Save");
-		btnOK.setOnAction(new setSaveAction());
 		add(btnOK, 1, 11, 2, 1);
 
 	}
 
-	class setSaveAction implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent arg0) {
-			String question = questionField.getText();
-			String statement = statementField.getText();
-			String categorie = (String) categoryField.getValue();
-			String feedback = feedbackField.getText();
-
-			try {
-				controller.addQuestion(question, statement, statements, categorie, feedback);
-			} catch (Exception e) {
-				Scene scene = new Scene(new GridPane());
-				showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
-			}
-		}
+	public void setSaveAction(EventHandler<ActionEvent> saveAction) {
+		btnOK.setOnAction(saveAction);
 	}
 
-	class setCancelAction implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent event) {
-			controller.closeQuestionDetail();
-		}
+	public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
+		btnCancel.setOnAction(cancelAction);
+	}
+	
+	public String getQuestion(){
+		return questionField.getText();
+	}
+	
+	public String getStatement(){
+		return statementField.getText();
+	}
+	
+	public Object getCategory(){
+		return categoryField.getValue();
+	}
+	
+	public String getFeedback(){
+		return feedbackField.getText();
+	}
+	
+	public ArrayList<String> getStatements(){
+		return statements;
+	}
+	
+	public void emptyFields(){
+		questionField.clear();
+		statementField.clear();
+		feedbackField.clear();
+		statementsArea.clear();
+		statements.clear();
+		i=0;
 	}
 
+	public void setAddStatementAction(EventHandler<ActionEvent> addAction) {
+		btnAdd.setOnAction(addAction);
+	}
+	
 	class AddStatementListener implements EventHandler<ActionEvent> {
 
 		@Override
 		public void handle(ActionEvent arg0) {
 			String statement = statementField.getText();
-
+			System.out.println(statements);
 			try {
 				if (statements.size() < 5) {
 					statements.add(statement);

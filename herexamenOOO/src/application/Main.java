@@ -1,6 +1,9 @@
 package application;
 
 import controller.Controller;
+import handler.CreateCategoryHandler;
+import handler.CreateQuestionHandler;
+import handler.StartTestHandler;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,12 +23,15 @@ public class Main extends Application {
 
 		try {
 			Controller controller = new Controller();
+			
 			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane(controller);
-
+			QuestionDetailPane questionDetailPane = new QuestionDetailPane(controller);
 			CategoryOverviewPane categoryOverviewPanel = new CategoryOverviewPane(controller);
-
+			CategoryDetailPane categoryDetailPane = new CategoryDetailPane(controller);
+			
+			
 			MessagePane messagePane = new MessagePane(controller);
-
+			TestPane testpane = new TestPane(controller);
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);
 
@@ -38,6 +44,11 @@ public class Main extends Application {
 			primaryStage.sizeToScene();
 
 			primaryStage.show();
+			
+			categoryOverviewPanel.setNewAction(new CreateCategoryHandler(categoryDetailPane, categoryOverviewPanel, controller));
+			questionOverviewPane.setNewAction(new CreateQuestionHandler(questionDetailPane, questionOverviewPane, controller));
+			messagePane.setStartAction(new StartTestHandler(controller, testpane));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

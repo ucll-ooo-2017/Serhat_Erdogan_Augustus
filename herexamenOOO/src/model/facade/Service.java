@@ -5,7 +5,7 @@ import java.util.Observable;
 
 import model.db.Categories;
 import model.db.Questions;
-import model.domain.Categorie;
+import model.domain.Category;
 import model.domain.Question;
 
 public class Service extends Observable{
@@ -18,19 +18,19 @@ public class Service extends Observable{
 		this.questions = new Questions();
 	}
 	
-	public void addCategorie(Categorie categorie){
+	public void addCategorie(Category categorie){
 		this.categories.addCategorie(categorie);
 		this.setChanged();
 		this.notifyObservers(this);
 	}
 	
-	public void deleteCategorie(Categorie categorie){
+	public void deleteCategorie(Category categorie){
 		this.categories.deleteCategorie(categorie);
 		this.setChanged();
 		this.notifyObservers(this);
 	}
 	
-	public ArrayList<Categorie> getCategories(){
+	public ArrayList<Category> getCategories(){
 		return categories.getCategories();
 	}
 	

@@ -31,41 +31,36 @@ public class CategoryOverviewPane extends GridPane {
 
 		this.add(new Label("Categories:"), 0, 0, 1, 1);
 
-
 		
 		//CATEGORY OVERVIEW
 		TableColumn nameCol= new TableColumn<>("Name");
 		TableColumn descriptionCol = new TableColumn<>("description");
-
+		
 		nameCol.setCellValueFactory(new PropertyValueFactory("title"));
 		descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));		
 
 		
 		table = new TableView<String>();
 		table.setPrefWidth(REMAINING);
-		table.setItems(controller.getCategorie());
+		table.setItems(controller.getCategorieObservable());
 		table.getColumns().addAll(nameCol,descriptionCol);
-
-		
-		
 		this.add(table, 0, 1, 2, 6);
 
-		
-		
+
 		//ADD NEW BUTTON
 		btnNew = new Button("New");
-		btnNew.setOnAction(new setNewAction());
 		this.add(btnNew, 0, 11, 1, 1);
 	}
-
-	class setNewAction implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent event) {
-			controller.startCatergoryDetail();
-		}
+	
+	public void refreshTable(){
+		table.getItems().clear();
+		table.setItems(controller.getCategorieObservable());
 	}
 	
-
+	public void setNewAction(EventHandler<ActionEvent> newAction) {
+		btnNew.setOnAction(newAction);
+	}
+	
 	public void setEditAction(EventHandler<MouseEvent> editAction) {
 		table.setOnMouseClicked(editAction);
 	}

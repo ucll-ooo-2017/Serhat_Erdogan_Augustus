@@ -21,7 +21,8 @@ public class TestPane extends GridPane {
 	private Controller controller;
 	private int i = 1;
 
-	public TestPane(Controller controller, Stage stage) {
+
+	public TestPane(Controller controller) {
 		this.controller = controller;
 		this.setPrefHeight(300);
 		this.setPrefWidth(750);
@@ -37,22 +38,28 @@ public class TestPane extends GridPane {
 
 		statementGroup = new ToggleGroup();
 
-		for (String s : controller.getStatements(controller.getNextQuestion())) {
+		for (String s : controller.getStatements(questionField.getText())) {
 
 			RadioButton rb1 = new RadioButton(s);
 			rb1.setToggleGroup(statementGroup);
+			rb1.setUserData(s);
 			add(rb1, 0, i, 1, 1);
 			i++;
 		}
-
+		
 		submitButton = new Button("Submit");
 		add(submitButton, 0, i+1, 1, 1);
 	}
+	
 
 	public void setProcessAnswerAction(EventHandler<ActionEvent> processAnswerAction) {
 		submitButton.setOnAction(processAnswerAction);
 	}
 
+	public String getAnwser(){
+		return statementGroup.getSelectedToggle().getUserData().toString();
+	}
+	
 	public List<String> getSelectedStatements() {
 		List<String> selected = new ArrayList<String>();
 		if (statementGroup.getSelectedToggle() != null) {
