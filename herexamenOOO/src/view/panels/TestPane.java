@@ -47,7 +47,6 @@ public class TestPane extends GridPane {
 			add(rb1, 0, i, 1, 1);
 			i++;
 		}
-		
 
 		submitButton = new Button("Submit");
 		add(submitButton, 0, i + 1, 1, 1);

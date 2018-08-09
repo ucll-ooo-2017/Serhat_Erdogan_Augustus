@@ -31,21 +31,22 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 		try {
 			System.out.println(testpane.getAnwser());
 			controller.getScore().controlAnwser(testpane.getAnwser());
-			
-			
-			if(controller.getScore().isLastQuestion()){
+
+			if (controller.getScore().isLastQuestion()) {
 				stage.close();
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Resultaat");
 				alert.setContentText(controller.getScore().toString());
 				alert.showAndWait();
-				
-				Alert feedback = new Alert(AlertType.INFORMATION);
-				feedback.setTitle("Feedback");
-				feedback.setContentText(controller.getScore().toStringFeedback());
-				feedback.showAndWait();
-				
-			}else{
+				if (!alert.getContentText().equals("Beautiful! Everything is Perfect!")) {
+					Alert feedback = new Alert(AlertType.INFORMATION);
+					feedback.setTitle("Feedback");
+					feedback.setContentText(controller.getScore().toStringFeedback());
+					feedback.showAndWait();
+				}
+				controller.setQuestionNumberNul();
+
+			} else {
 				stage.close();
 				Stage stage = new Stage();
 				BorderPane pane = new BorderPane();
@@ -54,13 +55,13 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 				Scene scene = new Scene(pane);
 				stage.setScene(scene);
 				stage.show();
-				testPane.setProcessAnswerAction(new SubmitAnswerHandler(controller,testPane,stage));
+				testPane.setProcessAnswerAction(new SubmitAnswerHandler(controller, testPane, stage));
 
 			}
-			
+
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());
-			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
+			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", "Please chose a answer!");
 		}
 
 	}

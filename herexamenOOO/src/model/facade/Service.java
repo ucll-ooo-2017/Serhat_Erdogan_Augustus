@@ -53,9 +53,6 @@ public class Service extends Observable{
 		return questions.getQuestions();
 	}
 
-	public ArrayList<String> getCorrectAnswers(){
-		return questions.getCorrectAnwsers();
-	}
 
 	public void newTest() {
 		score = new Score(this.getCategories(),this.getQuestions());

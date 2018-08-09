@@ -34,9 +34,9 @@ public class Controller implements Observer {
 		statements.add("Gewoon");
 		statements.add("zwijg");
 		statements.add("geen idee");
-		Question question1 = new Question("Waarom ben ik hier?", "Daarom", statements, "Java", "Zwijg gwn");
-		Question question2 = new Question("Hoe oud ben je?", "Daarom", statements, "Java", "Zwijg gwn");
-		Question question3 = new Question("hoe laat is het?", "Daarom", statements, "Java", "Zwijg gwn");
+		Question question1 = new Question("Waarom ben ik hier?","Daarom", statements, "Java", "Zwijg gwn");
+		Question question2 = new Question("Hoe oud ben je?","Daarom",  statements, "Java", "Zwijg gwn");
+		Question question3 = new Question("hoe laat is het?","Daarom",  statements, "Java", "Zwijg gwn");
 		service.addCategory(cat1);
 		service.addCategory(cat2);
 		service.addQuestion(question1);
@@ -73,19 +73,24 @@ public class Controller implements Observer {
 	}
 
 	// questionController
-	public void addQuestion(String question, String statement, ArrayList<String> statements, String category,
+	public void addQuestion(String question, String correctStatement, ArrayList<String> answers, String category,
 			String feedback) {
-		Question ques = new Question(question, statement, statements, category, feedback);
+		Question ques = new Question(question,correctStatement, answers, category, feedback);
+		System.out.println(ques.getStatements());
 		service.addQuestion(ques);
 	}
 
 	public ArrayList<Question> getQuestions() {
 		return service.getQuestions();
 	}
+	
 
 	public ObservableList<Question> getQuestionsObservable() {
 		ObservableList<Question> questions = FXCollections.observableArrayList(service.getQuestions());
 		return questions;
+	}
+	public void setQuestionNumberNul(){
+		this.questionNumber = 1;
 	}
 
 	public String getNextQuestion() {
@@ -94,9 +99,11 @@ public class Controller implements Observer {
 			if (questionNumber < getQuestions().size()) {
 				question = getQuestions().get(questionNumber).getQuestion();
 				questionNumber++;
+				System.out.println(questionNumber + ": " + question);
 			}
+		
 		}
-		System.out.println(questionNumber + ": " + question);
+		
 		return question;
 	}
 
@@ -109,8 +116,10 @@ public class Controller implements Observer {
 		for (Question cat : service.getQuestions()) {
 			if (cat.getQuestion().equals(question)) {
 				statements = cat.getStatements();
+				
 			}
 		}
+		System.out.println(statements);
 		return statements;
 	}
 

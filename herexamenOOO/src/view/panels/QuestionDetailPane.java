@@ -104,7 +104,7 @@ public class QuestionDetailPane extends GridPane {
 	}
 	
 	public String getStatement(){
-		return statementField.getText();
+		return statements.get(0);
 	}
 	
 	public Object getCategory(){
@@ -137,7 +137,6 @@ public class QuestionDetailPane extends GridPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			String statement = statementField.getText();
-			System.out.println(statements);
 			try {
 				if (statements.size() < 5) {
 					statements.add(statement);

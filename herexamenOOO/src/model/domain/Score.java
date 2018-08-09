@@ -27,7 +27,7 @@ public class Score {
 
 	public void controlAnwser(String answer) {
 		String category = questions.get(currentQuestionId).getCategory();
-		if (questions.get(currentQuestionId).getStatements().get(0).equals(answer)) {
+		if (questions.get(currentQuestionId).getCorrectStatement().equals(answer)) {
 
 			score.put(category, score.get(category) + 1);
 			totalscoren.put(category, totalscoren.get(category) + 1);
@@ -70,24 +70,30 @@ public class Score {
 		this.questions = questions;
 	}
 
-	public String toString(){
+	public String toString() {
 		String total = "";
 		int totalscore = 0;
-		
-		for(String key:score.keySet()){
-			total = total + "Category" + key + ": " + score.get(key) + "/" + totalscoren.get(key) + "\n";
-			totalscore =  totalscore + score.get(key);
+
+		for (String key : score.keySet()) {
+			total = total + "Category " + key + ": " + score.get(key) + "/" + totalscoren.get(key) + "\n";
+			totalscore = totalscore + score.get(key);
 		}
-		return "Your Score: " + totalscore + "\n" + total;
+		if (totalscore == questions.size()) {
+			return "Beautiful! Everything is Perfect!";
+		} else {
+			return "Your Score: " + totalscore + "\n" + total;
+		}
 	}
-	
-	public String toStringFeedback(){
+
+	public String toStringFeedback() {
 		String feedback = "";
-		
-		for(Question key:falseQuestions){
-			feedback = feedback + key.getFeedback() + "\n";
+		String question = "";
+		for (Question key : falseQuestions) {
+			
+			feedback =  "	Feedback: "+ key.getFeedback() + "\n";
+			question = question + key.getQuestion() +"\n" + feedback;
 		}
-		return feedback;
+		return question;
 	}
-	
+
 }

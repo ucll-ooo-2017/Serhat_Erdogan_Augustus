@@ -35,11 +35,12 @@ public class SaveQuestionHandler implements EventHandler<ActionEvent> {
 	
 		try {
 			String question = questionDetailPane.getQuestion();
-			String statement = questionDetailPane.getStatement();
+			String answer = questionDetailPane.getStatement();
 			String categorie = (String) questionDetailPane.getCategory();
 			String feedback = questionDetailPane.getFeedback();
 			ArrayList<String> statements = questionDetailPane.getStatements();
-			controller.addQuestion(question, statement, statements, categorie, feedback);
+			System.out.println("question: " +question +"  statements: "+ statements);
+			controller.addQuestion(question,answer, statements, categorie, feedback);
 			questionDetailPane.emptyFields();
 			stage.close();
 			questionOverviewPane.refreshTable();
