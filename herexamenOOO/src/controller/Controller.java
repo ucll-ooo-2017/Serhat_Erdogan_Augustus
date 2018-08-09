@@ -76,7 +76,6 @@ public class Controller implements Observer {
 	public void addQuestion(String question, String correctStatement, ArrayList<String> answers, String category,
 			String feedback) {
 		Question ques = new Question(question,correctStatement, answers, category, feedback);
-		System.out.println(ques.getStatements());
 		service.addQuestion(ques);
 	}
 
@@ -107,9 +106,7 @@ public class Controller implements Observer {
 		return question;
 	}
 
-	public ArrayList<String> getCorrectAnswers() {
-		return service.getCorrectAnswers();
-	}
+	
 
 	public ArrayList<String> getStatements(String question) {
 		ArrayList<String> statements = new ArrayList<String>();
