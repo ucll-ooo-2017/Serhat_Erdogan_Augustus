@@ -100,20 +100,16 @@ public class Controller implements Observer {
 				questionNumber++;
 				System.out.println(questionNumber + ": " + question);
 			}
-		
 		}
 		
 		return question;
 	}
-
-	
 
 	public ArrayList<String> getStatements(String question) {
 		ArrayList<String> statements = new ArrayList<String>();
 		for (Question cat : service.getQuestions()) {
 			if (cat.getQuestion().equals(question)) {
 				statements = cat.getStatements();
-				
 			}
 		}
 		System.out.println(statements);

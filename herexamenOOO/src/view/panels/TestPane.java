@@ -32,6 +32,7 @@ public class TestPane extends GridPane {
 		this.setHgap(5);
 
 		questionField = new Label();
+		questionField.setId("testTitle");
 		questionField.setText(controller.getNextQuestion());
 
 		add(questionField, 0, 0, 1, 1);

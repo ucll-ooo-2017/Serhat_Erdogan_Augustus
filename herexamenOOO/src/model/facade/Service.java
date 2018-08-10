@@ -23,6 +23,7 @@ public class Service extends Observable{
 	
 	public void addCategory(Category categorie){
 		this.categories.addCategorie(categorie);
+		
 		this.setChanged();
 		this.notifyObservers(this);
 	}

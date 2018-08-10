@@ -23,6 +23,7 @@ public class Questions {
 				}
 			}
 		}
+		
 		this.questions.add(question);
 	}
 	
