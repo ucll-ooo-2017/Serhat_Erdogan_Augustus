@@ -18,13 +18,15 @@ public class StartTestHandler implements EventHandler<ActionEvent> {
 	TestPane testPane;
 	
 	
-	public StartTestHandler(Controller controller,TestPane pane) {
+	public StartTestHandler(Controller controller) {
 		this.controller = controller;
-		this.testPane = pane;
+		
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
+		controller.setQuestionNumberNul();
+		testPane = new TestPane(controller);
 		if (controller.getQuestions().isEmpty()) {
 			Scene scene = new Scene(new GridPane());
 			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", "There are no question! Try to make questions first before taking the test...");

@@ -13,7 +13,7 @@ public class Question {
 	public Question(String question,String correctStatement, ArrayList<String> statements, String category, String feedback) {
 		setQuestion(question);
 		setCorrectStatement(correctStatement);
-		this.Statements = statements;
+		setStatements(statements);
 		setCategory(category);
 		setFeedback(feedback);
 	}
@@ -64,6 +64,13 @@ public class Question {
 			throw new DomainException("Please provide a feedback.");
 		}
 		this.feedback = feedback;
+	}
+	
+	public void setStatements(ArrayList<String> statements){
+		if(statements == null || statements.isEmpty()){
+			throw new DomainException("There have to be statements for every Question");
+		}
+		this.Statements = statements;
 	}
 
 }

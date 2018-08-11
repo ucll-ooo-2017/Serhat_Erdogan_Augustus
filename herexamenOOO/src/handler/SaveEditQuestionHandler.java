@@ -15,14 +15,14 @@ import view.panels.CategoryOverviewPane;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
 
-public class SaveQuestionHandler implements EventHandler<ActionEvent> {
+public class SaveEditQuestionHandler implements EventHandler<ActionEvent> {
 	Stage stage;
 	Controller controller;
 	QuestionOverviewPane questionOverviewPane;
 	QuestionDetailPane questionDetailPane;
 	
 	
-	public  SaveQuestionHandler(QuestionDetailPane detailPane, QuestionOverviewPane overviewPane, Controller controller,Stage stage) {
+	public  SaveEditQuestionHandler(QuestionDetailPane detailPane, QuestionOverviewPane overviewPane, Controller controller,Stage stage) {
 		this.controller = controller;
 		this.questionDetailPane = detailPane;
 		this.questionOverviewPane = overviewPane;
@@ -32,14 +32,15 @@ public class SaveQuestionHandler implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent event) {
-	
 		try {
+			String oldQuestion = questionDetailPane.getOldQuestion();
 			String question = questionDetailPane.getQuestion();
 			String answer = questionDetailPane.getStatement();
 			String categorie = (String) questionDetailPane.getCategory();
 			String feedback = questionDetailPane.getFeedback();
 			ArrayList<String> statements = questionDetailPane.getStatements();
-			controller.addQuestion(question,answer, statements, categorie, feedback);
+			System.out.println("question: " +question +"  statements: "+ statements);
+			controller.editQuestion(oldQuestion,question,answer, statements, categorie, feedback);
 			stage.close();
 			//questionOverviewPane.refreshTable();
 		} catch (Exception e) {

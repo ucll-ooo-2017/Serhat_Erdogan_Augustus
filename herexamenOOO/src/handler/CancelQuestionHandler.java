@@ -19,7 +19,6 @@ public class CancelQuestionHandler implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent event) {
-		questionDetailPane.emptyFields();
 		stage.close();
 	}
 }

@@ -3,6 +3,7 @@ package model.facade;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import controller.Evaluation;
 import model.db.Categories;
 import model.db.Questions;
 import model.domain.Category;
@@ -14,16 +15,20 @@ public class Service extends Observable{
 	private Categories categories;
 	private Questions questions;
 	private Score score;
-	
+	private Evaluation evaluation;
 	public Service(){
 		this.categories = new Categories();
 		this.questions = new Questions();
-		
+		this.evaluation = new Evaluation();
 	}
 	
 	public void addCategory(Category categorie){
-		this.categories.addCategorie(categorie);
-		
+		this.categories.addCategorie(categorie);		
+		this.setChanged();
+		this.notifyObservers(this);
+	}
+	public void editCategory(String oldName, Category categorie){
+		this.categories.EditCategorie(oldName,categorie);
 		this.setChanged();
 		this.notifyObservers(this);
 	}
@@ -43,7 +48,11 @@ public class Service extends Observable{
 		this.setChanged();
 		this.notifyObservers(this);
 	}
-	
+	public void editQuestion(String oldQuestion, Question ques) {
+		this.questions.EditQuestion(oldQuestion,ques);
+		this.setChanged();
+		this.notifyObservers(this);		
+	}
 	public void deleteQuestion(Question question){
 		this.questions.deleteQuestion(question);
 		this.setChanged();
@@ -57,10 +66,18 @@ public class Service extends Observable{
 
 	public void newTest() {
 		score = new Score(this.getCategories(),this.getQuestions());
+		
 	}
 	
 	public Score getScore(){
+		this.setChanged();
+		this.notifyObservers(this);
 		return score;
 	}
+	public Evaluation getEvaluation(){
+		return evaluation;
+	}
+
+	
 	
 }

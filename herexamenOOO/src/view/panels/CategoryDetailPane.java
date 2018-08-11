@@ -1,34 +1,34 @@
 package view.panels;
 
-import java.awt.Frame;
-import java.awt.event.WindowEvent;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-
 import controller.Controller;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import javafx.util.converter.BooleanStringConverter;
 
 public class CategoryDetailPane extends GridPane {
-	private Button btnOK, btnCancel;
+	private Button btnOK, btnCancel, btnEdit;
 	private TextField titleField, descriptionField;
 	private ComboBox<String> categoryField;
 	private Controller controller;
+	private String catTitle;
 
 	public CategoryDetailPane(Controller controller) {
 		this.controller = controller;
+		this.screen();
+	}
+
+	public CategoryDetailPane(Controller controller, String title) {
+		this.controller = controller;
+		catTitle = title;
+		this.screen();
+	}
+
+	private void screen() {
 
 		this.setPrefHeight(150);
 		this.setPrefWidth(300);
@@ -39,6 +39,7 @@ public class CategoryDetailPane extends GridPane {
 
 		this.add(new Label("Title:"), 0, 0, 1, 1);
 		titleField = new TextField();
+
 		this.add(titleField, 1, 0, 1, 1);
 
 		this.add(new Label("Description:"), 0, 1, 1, 1);
@@ -51,13 +52,34 @@ public class CategoryDetailPane extends GridPane {
 		categoryField.getItems().addAll("Main", "Sub");
 		this.add(categoryField, 1, 2, 1, 1);
 
+		if (catTitle != null && !catTitle.isEmpty()) {
+			titleField.setText(controller.getCategory(catTitle).getTitle());
+			descriptionField.setText(controller.getCategory(catTitle).getDescription());
+			if (controller.getCategory(catTitle).getMainCategory() == true) {
+				categoryField.setValue("Main");
+
+			} else {
+				categoryField.setValue("Sub");
+
+			}
+		}
+
 		btnCancel = new Button("Cancel");
 		this.add(btnCancel, 0, 3, 1, 1);
 
-		btnOK = new Button("Save");
-		btnOK.isDefaultButton();
-		this.add(btnOK, 1, 3, 1, 1);
+		if (catTitle != null && !catTitle.isEmpty()) {
+			btnEdit = new Button("Edit");
+			btnEdit.isDefaultButton();
+			this.add(btnEdit, 1, 3, 1, 1);
+		} else {
+			btnOK = new Button("Save");
+			btnOK.isDefaultButton();
+			this.add(btnOK, 1, 3, 1, 1);
+		}
+	}
 
+	public void setEditAction(EventHandler<ActionEvent> editAction) {
+		btnEdit.setOnAction(editAction);
 	}
 
 	public void setSaveAction(EventHandler<ActionEvent> saveAction) {
@@ -77,7 +99,6 @@ public class CategoryDetailPane extends GridPane {
 	}
 
 	public Boolean isMainCategory() {
-		System.out.println(categoryField.getValue() );
 		if (categoryField.getValue() == "Main") {
 			return true;
 		} else {
@@ -85,10 +106,8 @@ public class CategoryDetailPane extends GridPane {
 		}
 	}
 
-	public void emptyFields() {
-		titleField.clear();
-		descriptionField.clear();
-		categoryField.setValue("Main");
+	public String getOldTitle() {
+		return catTitle;
 	}
 
 }

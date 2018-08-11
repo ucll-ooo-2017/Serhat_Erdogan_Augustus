@@ -9,37 +9,36 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import view.panels.CategoryDetailPane;
-import view.panels.CategoryOverviewPane;
+import view.panels.QuestionDetailPane;
+import view.panels.QuestionOverviewPane;
 
-public class CreateCategoryHandler implements EventHandler<ActionEvent> {
+public class EditQuestionHandler  {
 	Stage stage;
 	Controller controller;
-	CategoryOverviewPane categoryOverviewPane;
-	CategoryDetailPane categoryDetailPane;
+	QuestionOverviewPane questionOverviewPane;
+	QuestionDetailPane questionDetailPane;
 
-	public CreateCategoryHandler(CategoryOverviewPane overviewPane, Controller controller) {
+	public EditQuestionHandler(QuestionDetailPane detailPane, QuestionOverviewPane overviewPane,
+			Controller controller) {
 		this.controller = controller;
-		this.categoryOverviewPane = overviewPane;
+		this.questionDetailPane = detailPane;
+		this.questionOverviewPane = overviewPane;
 	}
-
-	@Override
-	public void handle(ActionEvent event) {
+	
+	public void open() {
 		try {
-			this.categoryDetailPane = new CategoryDetailPane(controller);
-
 			this.stage = new Stage();
 			BorderPane pane = new BorderPane();
-			pane.setCenter(categoryDetailPane);
+			pane.setCenter(questionDetailPane);
 			Scene scene = new Scene(pane);
 			stage.setScene(scene);
 			stage.show();
-			categoryDetailPane.setSaveAction(
-					new SaveCategoryHandler(categoryDetailPane, categoryOverviewPane, controller, stage));
-			categoryDetailPane.setCancelAction(new CancelCategoryHandler(stage, categoryDetailPane));
+			questionDetailPane.setEditAction(
+					new SaveEditQuestionHandler(questionDetailPane, questionOverviewPane, controller, stage));
+			questionDetailPane.setCancelAction(new CancelQuestionHandler(stage, questionDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());
-			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
+			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", "Oops something whent wrong.. Please close the app and start over.");
 		}
 
 	}

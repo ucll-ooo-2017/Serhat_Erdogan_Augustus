@@ -29,11 +29,11 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 
 		try {
-			System.out.println(testpane.getAnwser());
 			controller.getScore().controlAnwser(testpane.getAnwser());
 
 			if (controller.getScore().isLastQuestion()) {
 				stage.close();
+				controller.getEvaluation().setProperty("test", "true");
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Resultaat");
 				alert.setContentText(controller.getScore().toString());
@@ -45,7 +45,6 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 					feedback.showAndWait();
 				}
 				controller.setQuestionNumberNul();
-
 			} else {
 				stage.close();
 				Stage stage = new Stage();

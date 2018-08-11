@@ -33,9 +33,8 @@ public class SaveCategoryHandler implements EventHandler<ActionEvent> {
 			String description = categoryDetailPane.getDescription();
 			Boolean mainCategory = categoryDetailPane.isMainCategory();
 			controller.AddCategory(title, description, mainCategory);
-			categoryDetailPane.emptyFields();
 			stage.close();
-			categoryOverviewPane.refreshTable();
+			//categoryOverviewPane.refreshTable();
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());
 			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());

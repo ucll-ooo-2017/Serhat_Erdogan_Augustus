@@ -12,34 +12,33 @@ import javafx.stage.Window;
 import view.panels.CategoryDetailPane;
 import view.panels.CategoryOverviewPane;
 
-public class CreateCategoryHandler implements EventHandler<ActionEvent> {
+public class EditCategoryHandler  {
 	Stage stage;
 	Controller controller;
 	CategoryOverviewPane categoryOverviewPane;
 	CategoryDetailPane categoryDetailPane;
 
-	public CreateCategoryHandler(CategoryOverviewPane overviewPane, Controller controller) {
+	public EditCategoryHandler(CategoryDetailPane detailPane, CategoryOverviewPane overviewPane,
+			Controller controller) {
 		this.controller = controller;
+		this.categoryDetailPane = detailPane;
 		this.categoryOverviewPane = overviewPane;
 	}
-
-	@Override
-	public void handle(ActionEvent event) {
+	
+	public void open() {
 		try {
-			this.categoryDetailPane = new CategoryDetailPane(controller);
-
 			this.stage = new Stage();
 			BorderPane pane = new BorderPane();
 			pane.setCenter(categoryDetailPane);
 			Scene scene = new Scene(pane);
 			stage.setScene(scene);
 			stage.show();
-			categoryDetailPane.setSaveAction(
-					new SaveCategoryHandler(categoryDetailPane, categoryOverviewPane, controller, stage));
+			categoryDetailPane.setEditAction(
+					new SaveEditCategoryHandler(categoryDetailPane, categoryOverviewPane, controller, stage));
 			categoryDetailPane.setCancelAction(new CancelCategoryHandler(stage, categoryDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());
-			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
+			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", "Oops something whent wrong.. Please close the app and start over.");
 		}
 
 	}

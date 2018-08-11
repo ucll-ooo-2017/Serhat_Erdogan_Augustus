@@ -1,28 +1,29 @@
 package view.panels;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Observable;
 
 import controller.Controller;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import handler.EditCategoryHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import model.domain.Category;
 
 public class CategoryOverviewPane extends GridPane {
 	private TableView table;
 	private Button btnNew;
 	private Controller controller;
-
+	EditCategoryHandler handler;
 	public CategoryOverviewPane(Controller controller) {
 		this.controller = controller;
 		this.setPadding(new Insets(5, 5, 5, 5));
@@ -31,32 +32,43 @@ public class CategoryOverviewPane extends GridPane {
 
 		this.add(new Label("Categories:"), 0, 0, 1, 1);
 
-		
-		//CATEGORY OVERVIEW
-		TableColumn nameCol= new TableColumn<>("Name");
+		// CATEGORY OVERVIEW
+		TableColumn nameCol = new TableColumn<>("Name");
 		TableColumn descriptionCol = new TableColumn<>("description");
-		
-		nameCol.setCellValueFactory(new PropertyValueFactory("title"));
-		descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));		
 
-		
+		nameCol.setCellValueFactory(new PropertyValueFactory("title"));
+		descriptionCol.setCellValueFactory(new PropertyValueFactory("description"));
+
 		table = new TableView<String>();
+
+		table.setRowFactory(tv -> {
+			TableRow<Category> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 1 && (!row.isEmpty())) {
+					Category data = row.getItem();
+					CategoryDetailPane detailPane = new CategoryDetailPane(controller,data.getTitle());
+					this.handler = new EditCategoryHandler(detailPane, this, controller);
+					this.handler.open();
+				}
+			});
+			return row;
+		});
+
 		table.setPrefWidth(REMAINING);
 		table.setItems(controller.getCategorieObservable());
-		table.getColumns().addAll(nameCol,descriptionCol);
+		table.getColumns().addAll(nameCol, descriptionCol);
 		this.add(table, 0, 1, 2, 6);
 
-
-		//ADD NEW BUTTON
+		// ADD NEW BUTTON
 		btnNew = new Button("New");
 		this.add(btnNew, 0, 11, 1, 1);
 	}
-	
-	public void refreshTable(){
+
+	public void refreshTable() {
 		table.getItems().clear();
 		table.setItems(controller.getCategorieObservable());
 	}
-	
+
 	public void setNewAction(EventHandler<ActionEvent> newAction) {
 		btnNew.setOnAction(newAction);
 	}

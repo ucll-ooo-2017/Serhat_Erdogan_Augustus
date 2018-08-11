@@ -18,20 +18,20 @@ import view.panels.QuestionOverviewPane;
 import view.panels.TestPane;
 
 public class Main extends Application {
+	QuestionOverviewPane questionOverviewPane;
+	CategoryOverviewPane categoryOverviewPanel;
+	MessagePane messagePane;
+
 	@Override
 	public void start(Stage primaryStage) {
 
 		try {
-			Controller controller = new Controller();
-			
-			QuestionOverviewPane questionOverviewPane = new QuestionOverviewPane(controller);
-			QuestionDetailPane questionDetailPane = new QuestionDetailPane(controller);
-			CategoryOverviewPane categoryOverviewPanel = new CategoryOverviewPane(controller);
-			CategoryDetailPane categoryDetailPane = new CategoryDetailPane(controller);
-			
-			
-			MessagePane messagePane = new MessagePane(controller);
-			TestPane testpane = new TestPane(controller);
+			Controller controller = new Controller(this);
+
+			questionOverviewPane = new QuestionOverviewPane(controller);
+			categoryOverviewPanel = new CategoryOverviewPane(controller);
+			messagePane = new MessagePane(controller);
+
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -39,17 +39,17 @@ public class Main extends Application {
 			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPanel, questionOverviewPane);
 			borderPane.prefHeightProperty().bind(scene.heightProperty());
 			borderPane.prefWidthProperty().bind(scene.widthProperty());
-			
+
 			root.getChildren().add(borderPane);
 			primaryStage.setScene(scene);
 			primaryStage.sizeToScene();
 
 			primaryStage.show();
-			
-			categoryOverviewPanel.setNewAction(new CreateCategoryHandler(categoryDetailPane, categoryOverviewPanel, controller));
-			questionOverviewPane.setNewAction(new CreateQuestionHandler(questionDetailPane, questionOverviewPane, controller));
-			messagePane.setStartAction(new StartTestHandler(controller, testpane));
-			
+
+			categoryOverviewPanel.setNewAction(new CreateCategoryHandler(categoryOverviewPanel, controller));
+			questionOverviewPane.setNewAction(new CreateQuestionHandler(questionOverviewPane, controller));
+			messagePane.setStartAction(new StartTestHandler(controller));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,5 +57,17 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public QuestionOverviewPane getQuestionOverviewPane() {
+		return questionOverviewPane;
+	}
+
+	public CategoryOverviewPane getCategoryOverviewPane() {
+		return categoryOverviewPanel;
+	}
+
+	public MessagePane getMessagePane() {
+		return messagePane;
 	}
 }

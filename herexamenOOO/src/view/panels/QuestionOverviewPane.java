@@ -1,21 +1,27 @@
 package view.panels;
 
 import controller.Controller;
+import handler.EditCategoryHandler;
+import handler.EditQuestionHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import model.domain.Question;
 
 public class QuestionOverviewPane extends GridPane {
 	private TableView table;
 	private Button btnNew;
 	private Controller controller;
+	EditQuestionHandler handler;
+	
 	
 	public QuestionOverviewPane(Controller controller) {
 		this.controller = controller;
@@ -25,14 +31,28 @@ public class QuestionOverviewPane extends GridPane {
         
 		this.add(new Label("Questions:"), 0, 0, 1, 1);
 		
-		table = new TableView<>();
-		table.setPrefWidth(REMAINING);
+		
         TableColumn questionCol = new TableColumn<>("Question");
         TableColumn categoryCol = new TableColumn<>("Category");
 
         questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
         categoryCol.setCellValueFactory(new PropertyValueFactory("category"));
 		
+        table = new TableView<>();
+        table.setRowFactory(tv -> {
+			TableRow<Question> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 1 && (!row.isEmpty())) {
+					Question data = row.getItem();
+					QuestionDetailPane detailPane = new QuestionDetailPane(controller,data.getQuestion());
+					this.handler = new EditQuestionHandler(detailPane, this, controller);
+					this.handler.open();
+				}
+			});
+			return row;
+		});
+        
+		table.setPrefWidth(REMAINING);
         table.setItems(controller.getQuestionsObservable());
 		table.getColumns().addAll(questionCol,categoryCol);
 		this.add(table, 0, 1, 2, 6);

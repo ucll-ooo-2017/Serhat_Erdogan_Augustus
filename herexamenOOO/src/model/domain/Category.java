@@ -18,6 +18,7 @@ public class Category {
 		this.mainCategory =true;
 	}
 	
+
 	public String getTitle() {
 		return title;
 	}

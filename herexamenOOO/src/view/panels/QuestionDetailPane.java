@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class QuestionDetailPane extends GridPane {
-	private Button btnOK, btnCancel;
+	private Button btnOK, btnCancel, btnEdit;
 	private TextArea statementsArea;
 	private TextField questionField, statementField, feedbackField;
 	private Button btnAdd, btnRemove;
@@ -30,11 +30,25 @@ public class QuestionDetailPane extends GridPane {
 	private Controller controller;
 	private ArrayList<String> statements;
 	private int i;
+	private String quesTitle;
+
+	public QuestionDetailPane(Controller controller, String question) {
+		this.quesTitle = question;
+		this.i = 0;
+		this.controller = controller;
+		statements = new ArrayList<>();
+		this.screen();
+	}
 
 	public QuestionDetailPane(Controller controller) {
 		i = 0;
 		this.controller = controller;
 		statements = new ArrayList<>();
+		this.screen();
+
+	}
+
+	private void screen() {
 		this.setPrefHeight(300);
 		this.setPrefWidth(320);
 
@@ -80,15 +94,33 @@ public class QuestionDetailPane extends GridPane {
 		feedbackField = new TextField();
 		add(feedbackField, 1, 10, 2, 1);
 
+		if (quesTitle != null && !quesTitle.isEmpty()) {
+			questionField.setText(controller.getQuestion(quesTitle).getQuestion());
+			this.showAllStatements();
+			categoryField.setValue(controller.getQuestion(quesTitle).getCategory());
+			feedbackField.setText(controller.getQuestion(quesTitle).getFeedback());
+		}
+
 		btnCancel = new Button("Cancel");
 		btnCancel.setText("Cancel");
 		add(btnCancel, 0, 11, 1, 1);
 
-		btnOK = new Button("Save");
-		btnOK.isDefaultButton();
-		btnOK.setText("Save");
-		add(btnOK, 1, 11, 2, 1);
+		if (quesTitle != null && !quesTitle.isEmpty()) {
+			btnEdit = new Button("Edit");
+			btnEdit.isDefaultButton();
+			btnEdit.setText("Edit");
+			add(btnEdit, 1, 11, 2, 1);
 
+		} else {
+			btnOK = new Button("Save");
+			btnOK.isDefaultButton();
+			btnOK.setText("Save");
+			add(btnOK, 1, 11, 2, 1);
+		}
+	}
+
+	public void setEditAction(EventHandler<ActionEvent> editAction) {
+		btnEdit.setOnAction(editAction);
 	}
 
 	public void setSaveAction(EventHandler<ActionEvent> saveAction) {
@@ -98,40 +130,52 @@ public class QuestionDetailPane extends GridPane {
 	public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
 		btnCancel.setOnAction(cancelAction);
 	}
-	
-	public String getQuestion(){
+
+	public String getQuestion() {
 		return questionField.getText();
 	}
-	
-	public String getStatement(){
+
+	public String getStatement() {
 		return statements.get(0);
 	}
-	
-	public Object getCategory(){
+
+	public Object getCategory() {
 		return categoryField.getValue();
 	}
-	
-	public String getFeedback(){
+
+	public String getFeedback() {
 		return feedbackField.getText();
 	}
-	
-	public ArrayList<String> getStatements(){
+
+	public ArrayList<String> getStatements() {
 		return statements;
 	}
-	
-	public void emptyFields(){
-		questionField.clear();
-		statementField.clear();
-		feedbackField.clear();
-		statementsArea.clear();
-		statements.clear();
-		i=0;
+
+	public String getOldQuestion() {
+		return quesTitle;
 	}
 
 	public void setAddStatementAction(EventHandler<ActionEvent> addAction) {
 		btnAdd.setOnAction(addAction);
 	}
-	
+	public void showAllStatements(){
+		for (String stat : controller.getStatements(quesTitle)) {
+			try {
+				if (statements.size() < 5) {
+					statements.add(stat);
+					String s = statements.get(i);
+					int j = i + 1;
+					statementsArea.appendText(j + ". " + s + "." + "\n");
+					i++;
+
+				}
+			} catch (Exception e) {
+				Scene scene = new Scene(new GridPane());
+				showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
+			}
+		}
+	}
+
 	class AddStatementListener implements EventHandler<ActionEvent> {
 
 		@Override
@@ -141,10 +185,10 @@ public class QuestionDetailPane extends GridPane {
 				if (statements.size() < 5) {
 					statements.add(statement);
 					String s = statements.get(i);
-						int j = i + 1;
-						statementsArea.appendText(j + ". " + s + "." + "\n");
-						i++;
-					
+					int j = i + 1;
+					statementsArea.appendText(j + ". " + s + "." + "\n");
+					i++;
+
 				}
 			} catch (Exception e) {
 				Scene scene = new Scene(new GridPane());

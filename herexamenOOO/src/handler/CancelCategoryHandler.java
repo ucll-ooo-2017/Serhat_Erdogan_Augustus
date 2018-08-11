@@ -18,7 +18,6 @@ public class CancelCategoryHandler implements EventHandler<ActionEvent> {
 	
 	@Override
 	public void handle(ActionEvent event) {
-		categoryDetailPane.emptyFields();
 		stage.close();
 	}
 }

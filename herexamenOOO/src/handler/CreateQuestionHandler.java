@@ -19,29 +19,34 @@ public class CreateQuestionHandler implements EventHandler<ActionEvent> {
 	Controller controller;
 	QuestionOverviewPane questionOverviewPane;
 	QuestionDetailPane questionDetailPane;
-	
-	public CreateQuestionHandler(QuestionDetailPane detailPane, QuestionOverviewPane overviewPane, Controller controller) {
+
+	public CreateQuestionHandler( QuestionOverviewPane overviewPane,
+			Controller controller) {
 		this.controller = controller;
-		this.questionDetailPane = detailPane;
 		this.questionOverviewPane = overviewPane;
 	}
+
 	@Override
 	public void handle(ActionEvent event) {
-		try{
-		this.stage = new Stage();
-		BorderPane pane = new BorderPane();
-		pane.setCenter(questionDetailPane);
-		Scene scene = new Scene(pane);
-		stage.setScene(scene);
-		stage.show();
-		questionDetailPane.setSaveAction(new SaveQuestionHandler(questionDetailPane,questionOverviewPane,controller,stage));
-		questionDetailPane.setCancelAction(new CancelQuestionHandler(stage,questionDetailPane));
+		try {
+			this.questionDetailPane = new QuestionDetailPane(controller);
+
+			this.stage = new Stage();
+			BorderPane pane = new BorderPane();
+			pane.setCenter(questionDetailPane);
+			Scene scene = new Scene(pane);
+			stage.setScene(scene);
+			stage.show();
+			questionDetailPane.setSaveAction(
+					new SaveQuestionHandler(questionDetailPane, questionOverviewPane, controller, stage));
+			questionDetailPane.setCancelAction(new CancelQuestionHandler(stage, questionDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());
 			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", e.getMessage());
 		}
-		
+
 	}
+
 	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);

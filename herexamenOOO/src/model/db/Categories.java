@@ -27,30 +27,44 @@ public class Categories {
 		this.categories.add(categorie);
 	}
 
-	public void deleteCategorie(Category categorie){
+	public void EditCategorie(String oldName, Category category) {
+		if (category == null) {
+			throw new DbException("The categorie can not be null!");
+		} else {
+			for (int i=0;i < this.categories.size(); i++) {
+				if (categories.get(i).getTitle().equals(oldName)) {
+					categories.remove(i);
+					categories.add(i, category);
+				}
+			}
+		}
+	}
+
+
+	public void deleteCategorie(Category categorie) {
 		this.categories.remove(categorie.getTitle());
 	}
-	
-	public Category getCategory(String name){
-		
+
+	public Category getCategory(String name) {
+
 		Category result = null;
-		for(Category cat:this.categories){
-			if(cat.getTitle()==name){
+		for (Category cat : this.categories) {
+			if (cat.getTitle() == name) {
 				result = cat;
 			}
 		}
-		if(result ==null ){
+		if (result == null) {
 			throw new DbException("Categorie was not found!");
-		}else{
+		} else {
 			return result;
 		}
 	}
-	
-	public int getSizeCategories(){
+
+	public int getSizeCategories() {
 		return this.categories.size();
 	}
-	
-	public ArrayList<Category> getCategories(){
+
+	public ArrayList<Category> getCategories() {
 		return categories;
 	}
 }

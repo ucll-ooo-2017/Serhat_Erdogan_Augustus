@@ -27,6 +27,19 @@ public class Questions {
 		this.questions.add(question);
 	}
 	
+	public void EditQuestion(String oldQuestion, Question ques) {
+		if (ques == null) {
+			throw new DbException("The categorie can not be null!");
+		} else {
+			for (int i=0;i < this.questions.size(); i++) {
+				if (questions.get(i).getQuestion().equals(oldQuestion)) {
+					questions.remove(i);
+					questions.add(i, ques);
+				}
+			}
+		}
+	}
+	
 	public void deleteQuestion(Question question){
 		this.questions.remove(question.getQuestion());
 	}
@@ -54,6 +67,8 @@ public class Questions {
 	public ArrayList<Question> getQuestions(){
 		return questions;
 	}
+
+	
 	
 
 }
