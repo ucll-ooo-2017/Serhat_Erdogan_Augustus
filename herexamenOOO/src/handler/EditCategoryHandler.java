@@ -1,8 +1,6 @@
 package handler;
 
 import controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
@@ -14,15 +12,12 @@ import view.panels.CategoryOverviewPane;
 
 public class EditCategoryHandler  {
 	Stage stage;
-	Controller controller;
-	CategoryOverviewPane categoryOverviewPane;
+	Controller controller = Controller.getInstance();
+	CategoryOverviewPane categoryOverviewPane = CategoryOverviewPane.getInstance();
 	CategoryDetailPane categoryDetailPane;
 
-	public EditCategoryHandler(CategoryDetailPane detailPane, CategoryOverviewPane overviewPane,
-			Controller controller) {
-		this.controller = controller;
+	public EditCategoryHandler(CategoryDetailPane detailPane) {
 		this.categoryDetailPane = detailPane;
-		this.categoryOverviewPane = overviewPane;
 	}
 	
 	public void open() {
@@ -34,7 +29,7 @@ public class EditCategoryHandler  {
 			stage.setScene(scene);
 			stage.show();
 			categoryDetailPane.setEditAction(
-					new SaveEditCategoryHandler(categoryDetailPane, categoryOverviewPane, controller, stage));
+					new SaveEditCategoryHandler(categoryDetailPane, stage));
 			categoryDetailPane.setCancelAction(new CancelCategoryHandler(stage, categoryDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());

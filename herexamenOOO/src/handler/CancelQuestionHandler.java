@@ -3,7 +3,6 @@ package handler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import view.panels.CategoryDetailPane;
 import view.panels.QuestionDetailPane;
 
 public class CancelQuestionHandler implements EventHandler<ActionEvent> {

@@ -14,12 +14,11 @@ import view.panels.TestPane;
 
 public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 
-	private Controller controller;
+	private Controller controller = Controller.getInstance();
 	private Stage stage;
 	private TestPane testpane;
 
-	public SubmitAnswerHandler(Controller controller, TestPane testPane, Stage stage) {
-		this.controller = controller;
+	public SubmitAnswerHandler(TestPane testPane, Stage stage) {
 		this.testpane = testPane;
 		this.stage = stage;
 
@@ -54,7 +53,7 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 				Scene scene = new Scene(pane);
 				stage.setScene(scene);
 				stage.show();
-				testPane.setProcessAnswerAction(new SubmitAnswerHandler(controller, testPane, stage));
+				testPane.setProcessAnswerAction(new SubmitAnswerHandler(testPane, stage));
 
 			}
 

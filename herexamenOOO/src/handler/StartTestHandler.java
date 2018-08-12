@@ -13,13 +13,12 @@ import view.panels.TestPane;
 
 public class StartTestHandler implements EventHandler<ActionEvent> {
 
-	Controller controller;
+	Controller controller = Controller.getInstance();
 	Stage stage;
 	TestPane testPane;
 	
 	
-	public StartTestHandler(Controller controller) {
-		this.controller = controller;
+	public StartTestHandler() {
 		
 	}
 
@@ -38,7 +37,7 @@ public class StartTestHandler implements EventHandler<ActionEvent> {
 			Scene scene = new Scene(pane);
 			stage.setScene(scene);
 			stage.show();
-			testPane.setProcessAnswerAction(new SubmitAnswerHandler(controller,testPane,stage));
+			testPane.setProcessAnswerAction(new SubmitAnswerHandler(testPane,stage));
 		}
 
 	}

@@ -5,33 +5,30 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+
 import model.domain.Category;
+import model.domain.Evaluation;
 import model.domain.Question;
 import model.domain.Score;
 import model.facade.Service;
-import view.panels.TestPane;
+import view.panels.CategoryOverviewPane;
+import view.panels.MessagePane;
+import view.panels.QuestionOverviewPane;
 
 public class Controller implements Observer {
 	private final Service service;
-	private Stage stage;
 	private int questionNumber = 0;
-	Main main;
 	private boolean refreshTable;
 	private boolean testDone;
-	
-	public Controller(Main main) {
+	private volatile static Controller uniqueInstance;
+
+	public Controller() {
 		refreshTable = false;
 		testDone = false;
-		this.main = main;
 		service = new Service();
 		service.addObserver(this);
-		this.stage = new Stage();
 
 		Category cat1 = new Category("Design principles", "The SOLID design principles.", true);
 		Category cat2 = new Category("Java", "java extra's.", true);
@@ -48,7 +45,17 @@ public class Controller implements Observer {
 		service.addQuestion(question1);
 		service.addQuestion(question2);
 		service.addQuestion(question3);
+	}
 
+	public static Controller getInstance() {
+		if (uniqueInstance == null) {
+			synchronized (Controller.class) {
+				if (uniqueInstance == null) {
+					uniqueInstance = new Controller();
+				}
+			}
+		}
+		return uniqueInstance;
 	}
 
 	public Service getService() {
@@ -182,19 +189,18 @@ public class Controller implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (this.refreshTable) {
-			this.main.getCategoryOverviewPane().refreshTable();
-			this.main.getQuestionOverviewPane().refreshTable();
+			CategoryOverviewPane.getInstance().refreshTable();
+			QuestionOverviewPane.getInstance().refreshTable();
 			refreshTable = false;
 		}
-		if(this.testDone){
+		if (this.testDone) {
 			try {
-				this.main.getMessagePane().showEvaluation();
-				this.testDone= false;
+				MessagePane.getInstance().showEvaluation();
+				this.testDone = false;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-	}
 
+	}
 }

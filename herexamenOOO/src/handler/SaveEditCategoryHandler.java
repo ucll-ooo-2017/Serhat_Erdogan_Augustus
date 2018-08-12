@@ -13,15 +13,13 @@ import view.panels.CategoryOverviewPane;
 
 public class SaveEditCategoryHandler implements EventHandler<ActionEvent> {
 	Stage stage;
-	Controller controller;
-	CategoryOverviewPane categoryOverviewPane;
+	Controller controller = Controller.getInstance();
+	CategoryOverviewPane categoryOverviewPane = CategoryOverviewPane.getInstance();
 	CategoryDetailPane categoryDetailPane;
 	
 	
-	public  SaveEditCategoryHandler(CategoryDetailPane detailPane, CategoryOverviewPane overviewPane, Controller controller,Stage stage) {
-		this.controller = controller;
+	public  SaveEditCategoryHandler(CategoryDetailPane detailPane,Stage stage) {
 		this.categoryDetailPane = detailPane;
-		this.categoryOverviewPane = overviewPane;
 		this.stage = stage;
 	}
 	

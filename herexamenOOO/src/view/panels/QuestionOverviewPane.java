@@ -1,7 +1,6 @@
 package view.panels;
 
 import controller.Controller;
-import handler.EditCategoryHandler;
 import handler.EditQuestionHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,12 +18,12 @@ import model.domain.Question;
 public class QuestionOverviewPane extends GridPane {
 	private TableView table;
 	private Button btnNew;
-	private Controller controller;
-	EditQuestionHandler handler;
+	private Controller controller = Controller.getInstance();
+	private EditQuestionHandler handler;
+	private volatile static QuestionOverviewPane uniqueInstance;
 	
 	
-	public QuestionOverviewPane(Controller controller) {
-		this.controller = controller;
+	public QuestionOverviewPane() {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -44,8 +43,8 @@ public class QuestionOverviewPane extends GridPane {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 1 && (!row.isEmpty())) {
 					Question data = row.getItem();
-					QuestionDetailPane detailPane = new QuestionDetailPane(controller,data.getQuestion());
-					this.handler = new EditQuestionHandler(detailPane, this, controller);
+					QuestionDetailPane detailPane = new QuestionDetailPane(data.getQuestion());
+					this.handler = new EditQuestionHandler(detailPane);
 					this.handler.open();
 				}
 			});
@@ -60,6 +59,18 @@ public class QuestionOverviewPane extends GridPane {
 		btnNew = new Button("New");
 		this.add(btnNew, 0, 11, 1, 1);
 	}
+	
+	public static QuestionOverviewPane getInstance() {
+		if (uniqueInstance == null) {
+			synchronized (QuestionOverviewPane.class) {
+				if (uniqueInstance == null) {
+					uniqueInstance = new QuestionOverviewPane();
+				}
+			}
+		}
+		return uniqueInstance;
+	}
+
 	
 	public void refreshTable(){
 		table.getItems().clear();

@@ -14,19 +14,18 @@ import view.panels.CategoryOverviewPane;
 
 public class CreateCategoryHandler implements EventHandler<ActionEvent> {
 	Stage stage;
-	Controller controller;
-	CategoryOverviewPane categoryOverviewPane;
+	Controller controller = Controller.getInstance();
+	CategoryOverviewPane categoryOverviewPane = CategoryOverviewPane.getInstance();
 	CategoryDetailPane categoryDetailPane;
 
-	public CreateCategoryHandler(CategoryOverviewPane overviewPane, Controller controller) {
-		this.controller = controller;
-		this.categoryOverviewPane = overviewPane;
+	public CreateCategoryHandler() {
+		
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		try {
-			this.categoryDetailPane = new CategoryDetailPane(controller);
+			this.categoryDetailPane = new CategoryDetailPane();
 
 			this.stage = new Stage();
 			BorderPane pane = new BorderPane();
@@ -35,7 +34,7 @@ public class CreateCategoryHandler implements EventHandler<ActionEvent> {
 			stage.setScene(scene);
 			stage.show();
 			categoryDetailPane.setSaveAction(
-					new SaveCategoryHandler(categoryDetailPane, categoryOverviewPane, controller, stage));
+					new SaveCategoryHandler(categoryDetailPane, stage));
 			categoryDetailPane.setCancelAction(new CancelCategoryHandler(stage, categoryDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());

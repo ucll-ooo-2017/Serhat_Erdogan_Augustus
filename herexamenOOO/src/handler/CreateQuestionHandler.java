@@ -9,27 +9,23 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import view.panels.CategoryDetailPane;
-import view.panels.CategoryOverviewPane;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
 
 public class CreateQuestionHandler implements EventHandler<ActionEvent> {
 	Stage stage;
-	Controller controller;
-	QuestionOverviewPane questionOverviewPane;
+	Controller controller = Controller.getInstance();
+	QuestionOverviewPane questionOverviewPane = QuestionOverviewPane.getInstance();
 	QuestionDetailPane questionDetailPane;
 
-	public CreateQuestionHandler( QuestionOverviewPane overviewPane,
-			Controller controller) {
-		this.controller = controller;
-		this.questionOverviewPane = overviewPane;
+	public CreateQuestionHandler( ) {
+		
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		try {
-			this.questionDetailPane = new QuestionDetailPane(controller);
+			this.questionDetailPane = new QuestionDetailPane();
 
 			this.stage = new Stage();
 			BorderPane pane = new BorderPane();
@@ -38,7 +34,7 @@ public class CreateQuestionHandler implements EventHandler<ActionEvent> {
 			stage.setScene(scene);
 			stage.show();
 			questionDetailPane.setSaveAction(
-					new SaveQuestionHandler(questionDetailPane, questionOverviewPane, controller, stage));
+					new SaveQuestionHandler(questionDetailPane, stage));
 			questionDetailPane.setCancelAction(new CancelQuestionHandler(stage, questionDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());

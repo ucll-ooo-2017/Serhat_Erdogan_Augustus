@@ -14,16 +14,14 @@ public class CategoryDetailPane extends GridPane {
 	private Button btnOK, btnCancel, btnEdit;
 	private TextField titleField, descriptionField;
 	private ComboBox<String> categoryField;
-	private Controller controller;
+	private Controller controller = Controller.getInstance();
 	private String catTitle;
 
-	public CategoryDetailPane(Controller controller) {
-		this.controller = controller;
+	public CategoryDetailPane() {
 		this.screen();
 	}
 
-	public CategoryDetailPane(Controller controller, String title) {
-		this.controller = controller;
+	public CategoryDetailPane(String title) {
 		catTitle = title;
 		this.screen();
 	}

@@ -1,11 +1,8 @@
 package view.panels;
 
-import java.awt.Label;
 import java.io.IOException;
-import java.util.Observer;
 
 import controller.Controller;
-import controller.Evaluation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -23,11 +20,10 @@ import javafx.scene.text.Text;
 public class MessagePane extends GridPane {
 	private Button testButton;
 	private Text l;
-	private Controller controller;
+	private Controller controller = Controller.getInstance();
+	private volatile static MessagePane uniqueInstance;
 
-	public MessagePane(Controller controller) throws IOException {
-
-		this.controller = controller;
+	public MessagePane() throws IOException {
 
 		setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -43,6 +39,17 @@ public class MessagePane extends GridPane {
 		this.showEvaluation();
 		add(l, 0, 0, 1, 1);
 		setHalignment(testButton, HPos.CENTER);
+	}
+
+	public static MessagePane getInstance() throws IOException {
+		if (uniqueInstance == null) {
+			synchronized (MessagePane.class) {
+				if (uniqueInstance == null) {
+					uniqueInstance = new MessagePane();
+				}
+			}
+		}
+		return uniqueInstance;
 	}
 
 	public void setStartAction(EventHandler<ActionEvent> startAction) {

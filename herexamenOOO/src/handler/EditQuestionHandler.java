@@ -1,8 +1,6 @@
 package handler;
 
 import controller.Controller;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
@@ -14,15 +12,12 @@ import view.panels.QuestionOverviewPane;
 
 public class EditQuestionHandler  {
 	Stage stage;
-	Controller controller;
-	QuestionOverviewPane questionOverviewPane;
+	Controller controller = Controller.getInstance();
+	QuestionOverviewPane questionOverviewPane = QuestionOverviewPane.getInstance();
 	QuestionDetailPane questionDetailPane;
 
-	public EditQuestionHandler(QuestionDetailPane detailPane, QuestionOverviewPane overviewPane,
-			Controller controller) {
-		this.controller = controller;
+	public EditQuestionHandler(QuestionDetailPane detailPane) {
 		this.questionDetailPane = detailPane;
-		this.questionOverviewPane = overviewPane;
 	}
 	
 	public void open() {
@@ -34,7 +29,7 @@ public class EditQuestionHandler  {
 			stage.setScene(scene);
 			stage.show();
 			questionDetailPane.setEditAction(
-					new SaveEditQuestionHandler(questionDetailPane, questionOverviewPane, controller, stage));
+					new SaveEditQuestionHandler(questionDetailPane, stage));
 			questionDetailPane.setCancelAction(new CancelQuestionHandler(stage, questionDetailPane));
 		} catch (Exception e) {
 			Scene scene = new Scene(new GridPane());

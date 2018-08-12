@@ -3,7 +3,7 @@ package model.facade;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import controller.Evaluation;
+import model.domain.Evaluation;
 import model.db.Categories;
 import model.db.Questions;
 import model.domain.Category;

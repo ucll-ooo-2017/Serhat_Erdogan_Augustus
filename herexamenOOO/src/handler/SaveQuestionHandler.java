@@ -10,22 +10,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import view.panels.CategoryDetailPane;
-import view.panels.CategoryOverviewPane;
 import view.panels.QuestionDetailPane;
 import view.panels.QuestionOverviewPane;
 
 public class SaveQuestionHandler implements EventHandler<ActionEvent> {
 	Stage stage;
-	Controller controller;
-	QuestionOverviewPane questionOverviewPane;
+	Controller controller = Controller.getInstance();
+	QuestionOverviewPane questionOverviewPane = QuestionOverviewPane.getInstance();
 	QuestionDetailPane questionDetailPane;
 	
 	
-	public  SaveQuestionHandler(QuestionDetailPane detailPane, QuestionOverviewPane overviewPane, Controller controller,Stage stage) {
-		this.controller = controller;
+	public  SaveQuestionHandler(QuestionDetailPane detailPane,Stage stage) {
 		this.questionDetailPane = detailPane;
-		this.questionOverviewPane = overviewPane;
 		this.stage = stage;
 	}
 	

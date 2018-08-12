@@ -1,4 +1,4 @@
-package controller;
+package model.domain;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

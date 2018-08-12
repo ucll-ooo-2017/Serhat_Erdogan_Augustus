@@ -3,9 +3,6 @@ package model.domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import model.db.Questions;
-
 public class Score {
 
 	private int currentQuestionId = 0;
