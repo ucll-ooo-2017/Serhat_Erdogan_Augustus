@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import model.strategyQuestion.QuestionType;
 
-public class Question implements QuestionType {
+public class Question  {
 
 	private String question;
 	private String correctStatement;
 	private ArrayList<String> Statements = new ArrayList<>();
 	private String category;
 	private String feedback;
+	private QuestionType questionType;
 
 	public Question(String question,String correctStatement, ArrayList<String> statements, String category, String feedback) {
 		setQuestion(question);
@@ -74,5 +75,15 @@ public class Question implements QuestionType {
 		}
 		this.Statements = statements;
 	}
-
+	
+	public String getQuestionType(){
+		return questionType.getQuestionType();
+	}
+	
+	public void setQuestionType(QuestionType newQuestionType){
+		if(newQuestionType == null){
+			throw new DomainException("Type can not be empty");
+		}
+		this.questionType = newQuestionType;
+	}
 }
