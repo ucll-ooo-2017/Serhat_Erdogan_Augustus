@@ -60,6 +60,7 @@ public class CategoryOverviewPane extends GridPane {
 
 		// ADD NEW BUTTON
 		btnNew = new Button("New");
+		btnNew.setId("new");
 		this.add(btnNew, 0, 11, 1, 1);
 	}
 	

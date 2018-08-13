@@ -84,13 +84,11 @@ public class Score {
 
 	public String toStringFeedback() {
 		String feedback = "";
-		String question = "";
 		for (Question key : falseQuestions) {
 			
-			feedback =  "	Feedback: "+ key.getFeedback() + "\n";
-			question = question + key.getQuestion() +"\n" + feedback;
+			feedback = feedback +  key.getFeedback()  + "\n\n";
 		}
-		return question;
+		return feedback;
 	}
 
 }

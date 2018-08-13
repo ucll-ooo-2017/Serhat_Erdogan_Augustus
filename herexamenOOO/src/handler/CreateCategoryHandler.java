@@ -31,6 +31,7 @@ public class CreateCategoryHandler implements EventHandler<ActionEvent> {
 			BorderPane pane = new BorderPane();
 			pane.setCenter(categoryDetailPane);
 			Scene scene = new Scene(pane);
+			scene.getStylesheets().add(getClass().getResource("DetailPane.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 			categoryDetailPane.setSaveAction(

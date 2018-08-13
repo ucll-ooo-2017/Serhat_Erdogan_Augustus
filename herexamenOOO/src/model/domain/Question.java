@@ -2,7 +2,9 @@ package model.domain;
 
 import java.util.ArrayList;
 
-public class Question {
+import model.strategyQuestion.QuestionType;
+
+public class Question implements QuestionType {
 
 	private String question;
 	private String correctStatement;

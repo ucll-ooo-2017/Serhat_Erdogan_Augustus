@@ -7,12 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -32,13 +34,16 @@ public class MessagePane extends GridPane {
 		this.setVgap(5);
 		this.setHgap(5);
 
+		this.setId("messagePane");
+		
 		testButton = new Button("Evaluate");
-
+		testButton.setId("new");
 		add(testButton, 0, 1, 1, 1);
 		l = new Text();
 		this.showEvaluation();
 		add(l, 0, 0, 1, 1);
 		setHalignment(testButton, HPos.CENTER);
+	
 	}
 
 	public static MessagePane getInstance() throws IOException {

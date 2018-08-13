@@ -21,24 +21,22 @@ public class QuestionOverviewPane extends GridPane {
 	private Controller controller = Controller.getInstance();
 	private EditQuestionHandler handler;
 	private volatile static QuestionOverviewPane uniqueInstance;
-	
-	
+
 	public QuestionOverviewPane() {
 		this.setPadding(new Insets(5, 5, 5, 5));
-        this.setVgap(5);
-        this.setHgap(5);
-        
-		this.add(new Label("Questions:"), 0, 0, 1, 1);
-		
-		
-        TableColumn questionCol = new TableColumn<>("Question");
-        TableColumn categoryCol = new TableColumn<>("Category");
+		this.setVgap(5);
+		this.setHgap(5);
 
-        questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
-        categoryCol.setCellValueFactory(new PropertyValueFactory("category"));
-		
-        table = new TableView<>();
-        table.setRowFactory(tv -> {
+		this.add(new Label("Questions:"), 0, 0, 1, 1);
+
+		TableColumn questionCol = new TableColumn<>("Question");
+		TableColumn categoryCol = new TableColumn<>("Category");
+
+		questionCol.setCellValueFactory(new PropertyValueFactory<>("question"));
+		categoryCol.setCellValueFactory(new PropertyValueFactory("category"));
+
+		table = new TableView<>();
+		table.setRowFactory(tv -> {
 			TableRow<Question> row = new TableRow<>();
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 1 && (!row.isEmpty())) {
@@ -50,16 +48,18 @@ public class QuestionOverviewPane extends GridPane {
 			});
 			return row;
 		});
-        
+
 		table.setPrefWidth(REMAINING);
-        table.setItems(controller.getQuestionsObservable());
-		table.getColumns().addAll(questionCol,categoryCol);
+		table.setItems(controller.getQuestionsObservable());
+		table.getColumns().addAll(questionCol, categoryCol);
 		this.add(table, 0, 1, 2, 6);
-		
+
 		btnNew = new Button("New");
+		btnNew.setId("new");
+
 		this.add(btnNew, 0, 11, 1, 1);
 	}
-	
+
 	public static QuestionOverviewPane getInstance() {
 		if (uniqueInstance == null) {
 			synchronized (QuestionOverviewPane.class) {
@@ -71,17 +71,15 @@ public class QuestionOverviewPane extends GridPane {
 		return uniqueInstance;
 	}
 
-	
-	public void refreshTable(){
+	public void refreshTable() {
 		table.getItems().clear();
 		table.setItems(controller.getQuestionsObservable());
 	}
-	
+
 	public void setNewAction(EventHandler<ActionEvent> newAction) {
 		btnNew.setOnAction(newAction);
 	}
-	
-	
+
 	public void setEditAction(EventHandler<MouseEvent> editAction) {
 		table.setOnMouseClicked(editAction);
 	}

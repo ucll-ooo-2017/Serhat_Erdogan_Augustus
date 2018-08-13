@@ -1,0 +1,68 @@
+
+
+#messagePane{
+	-fx-background-color: white;
+	
+}
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0.0;
+}
+
+.tab-pane
+{
+    -fx-tab-min-width:230.0;
+}
+
+.tab{
+    -fx-background-insets: 0.0 1.0 0.0 1.0,0.0,0.0;
+}
+.tab-pane .tab
+{
+	  -fx-margin: 5.0;
+	
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 10.0, 0.4, 3.0, 3.0);
+	-fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane .tab:selected
+{
+	-fx-background-color:  #E00049;
+	-fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 5.0, 0.5, 0.0, 1.0);
+    }
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12.0px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+
+#new{
+  -fx-padding: 5.0;
+
+    -fx-background-color:  #E00049;
+    -fx-background-insets: 0.0 0.0 0.0 0.0, 0.0 1.0 5.0 0.0;
+  	 -fx-background-radius: 5.0; 
+ 	-fx-pref-height: 20.0;
+ 	  -fx-pref-width: 70.0;
+    -fx-font-size: 10.0px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 10.0, 0.4, 3.0, 3.0);
+}
+
+#new:pressed {
+    -fx-background-color:  #E00049;
+    -fx-background-insets: 2.0 1.0 0.0 1.0, 2.0 0.0 2.0 1.0;
+  -fx-background-radius: 5.0; 
+    -fx-padding: 5.0 4.0 2.0 6.0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 5.0, 0.5, 0.0, 1.0);
+}

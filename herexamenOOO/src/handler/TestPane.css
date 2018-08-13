@@ -1,21 +1,125 @@
 #testTitle {
-	-fx-font-size: 20.0;
+	-fx-font-size: 10.0;
 	-fx-font-weight: bold;
-	-fx-alignment: center ;
     -fx-padding: 10.0;
+        -fx-text-fill:  white;
+    
 }
 
 #radioButton{
-		-fx-font-size: 13.0;
-	
-	    -fx-padding: 2.0;
+		-fx-font-size: 10.0;
+	    -fx-text-fill:  white;
+	    	    -fx-padding: 3.0;
+	    
+	    -fx-padding-left: 5.0;
+	    	-fx-font-weight: bold;
+	    
 	
 }
 #questionNumber{
     -fx-padding: 5.0;
-    	-fx-font-size: 15.0;
-    		-fx-font-weight: bold;
+    -fx-font-size: 15.0;
+   	-fx-font-weight: bold;
+    -fx-text-fill:  white;
     	
-    
-	
 }
+.root {
+
+  -fx-border-radius: 20.0;
+    -fx-background-radius: 20.0;
+-fx-background-color: #E00049;
+}
+
+
+#testPane{
+	
+	  -fx-background-image: url("/rood.jpg"),url("/rood.jpg"),url("/rood.jpg"), url("/ucll.jpg"); 
+	-fx-background-repeat: no-repeat no-repeat;
+	-fx-background-position: 230.0 150.0, 430.0 150.0, 230.0 230.0, 430.0 200.0, center;
+-fx-background-repeat: no-repeat no-repeat;
+-fx-background-size: 120.0 120.0, 120.0 120.0, 120.0 120.0, 120.0 120.0, 80 80;
+}
+
+#submitButton{
+  -fx-padding: 5.0;
+
+   	-fx-background-color:  white;
+    -fx-background-insets: 0.0 0.0 0.0 0.0, 0.0 1.0 5.0 0.0;
+  	 -fx-background-radius: 5.0; 
+ 	-fx-pref-height: 20.0;
+ 	  -fx-pref-width: 70.0;
+    -fx-font-size: 10.0px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E00049;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 10.0, 0.4, 3.0, 3.0);
+}
+
+#submitButton:pressed {
+    -fx-background-color:  #E00049;
+    -fx-background-insets: 2.0 1.0 0.0 1.0, 2.0 0.0 2.0 1.0;
+  -fx-background-radius: 5.0; 
+    -fx-padding: 5.0 4.0 2.0 6.0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 5.0, 0.5, 0.0, 1.0);
+}
+
+
+.dialog-pane{
+  -fx-border-color:#E00049;
+  -fx-border-width:10.0px;
+ }
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+  -fx-background-color:#E00049;
+}
+
+.dialog-pane > .content.label {
+   -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+   -fx-background-color: #E00049;
+   -fx-text-fill:white;
+   -fx-font-size:12.0px;
+   	-fx-font-weight: bold;
+   
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+	
+  -fx-background-color: #E00049;
+  
+}
+
+.dialog-pane:header .header-panel .label{
+  -fx-background-color: #E00049;
+  -fx-background-radius:10px;
+  -fx-text-fill:white;
+  -fx-font-size:15.0px;
+  		    	    -fx-padding: 10.0;
+  
+    	-fx-font-weight: bold;
+  
+}
+
+
+/**Costumization of Buttons**/
+.dialog-pane .button{
+   -fx-padding: 5.0;
+
+   	-fx-background-color:  white;
+    -fx-background-insets: 0.0 0.0 0.0 0.0, 0.0 1.0 5.0 0.0;
+  	 -fx-background-radius: 5.0; 
+ 	-fx-pref-height: 20.0;
+ 	  -fx-pref-width: 70.0;
+    -fx-font-size: 10.0px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #E00049;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 10.0, 0.4, 3.0, 3.0);
+ }
+
+.dialog-pane .button:pressed{     
+-fx-background-color:  #E00049;
+    -fx-background-insets: 2.0 1.0 0.0 1.0, 2.0 0.0 2.0 1.0;
+  -fx-background-radius: 5.0; 
+    -fx-padding: 5.0 4.0 2.0 6.0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.5), 5.0, 0.5, 0.0, 1.0);
+ }

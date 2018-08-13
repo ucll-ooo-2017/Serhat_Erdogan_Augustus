@@ -33,11 +33,11 @@ public class QuestionDetailPane extends GridPane {
 	private ArrayList<String> statements;
 	private String quesTitle;
 	private int i;
-	private Label Lstatement, LstatementsArea,LAnwser;
-	//private Pane toggle;
-	//private ToggleGroup group, group2;
-	//private RadioButton rb1, rb2;
-	//private ToggleButton tb1, tb2;
+	private Label Lstatement, LstatementsArea, LAnwser;
+	// private Pane toggle;
+	// private ToggleGroup group, group2;
+	// private RadioButton rb1, rb2;
+	// private ToggleButton tb1, tb2;
 
 	public QuestionDetailPane(String question) {
 		this.quesTitle = question;
@@ -65,21 +65,18 @@ public class QuestionDetailPane extends GridPane {
 		questionField = new TextField();
 		add(questionField, 1, 0, 2, 1);
 
-		/*add(new Label("Question type: "), 0, 1, 1, 1);
-		Pane radio = new HBox();
-		group = new ToggleGroup();
-		rb1 = new RadioButton("Yes/No");
-		rb1.setToggleGroup(group);
-		rb1.setUserData("Yes/No");
-		rb1.setOnAction(new clearStatementArea());
-		radio.getChildren().add(rb1);
-
-		rb2 = new RadioButton("Multiple choice");
-		rb2.setToggleGroup(group);
-		rb2.setUserData("multiple choice");
-		rb2.setOnAction(new addStatementsArea());
-		radio.getChildren().add(rb2);
-		add(radio, 1, 1, 3, 1);*/
+		/*
+		 * add(new Label("Question type: "), 0, 1, 1, 1); Pane radio = new
+		 * HBox(); group = new ToggleGroup(); rb1 = new RadioButton("Yes/No");
+		 * rb1.setToggleGroup(group); rb1.setUserData("Yes/No");
+		 * rb1.setOnAction(new clearStatementArea());
+		 * radio.getChildren().add(rb1);
+		 * 
+		 * rb2 = new RadioButton("Multiple choice"); rb2.setToggleGroup(group);
+		 * rb2.setUserData("multiple choice"); rb2.setOnAction(new
+		 * addStatementsArea()); radio.getChildren().add(rb2); add(radio, 1, 1,
+		 * 3, 1);
+		 */
 
 		Lstatement = new Label("Statement: ");
 		add(Lstatement, 0, 2, 1, 1);
@@ -93,40 +90,32 @@ public class QuestionDetailPane extends GridPane {
 		statementsArea.setEditable(false);
 		add(statementsArea, 1, 3, 2, 5);
 
-		/*Lstatement.setVisible(false);
-		statementField.setVisible(false);
-		LstatementsArea.setVisible(false);
-		statementsArea.setVisible(false);
-
-		LAnwser = new Label("Anwser: ");
-		add(LAnwser, 0, 3, 1, 1);
-		toggle = new HBox();
-		group2 = new ToggleGroup();
-		tb1 = new ToggleButton("Yes");
-		tb1.setToggleGroup(group);
-		tb1.setUserData("Yes");
-		toggle.getChildren().add(tb1);
-
-		tb2 = new ToggleButton("No");
-		tb2.setToggleGroup(group);
-		tb2.setUserData("No");
-		toggle.getChildren().add(tb2);
-		add(toggle, 1, 3, 1, 1);
-		LAnwser.setVisible(false);
-		toggle.setVisible(false);*/
+		/*
+		 * Lstatement.setVisible(false); statementField.setVisible(false);
+		 * LstatementsArea.setVisible(false); statementsArea.setVisible(false);
+		 * 
+		 * LAnwser = new Label("Anwser: "); add(LAnwser, 0, 3, 1, 1); toggle =
+		 * new HBox(); group2 = new ToggleGroup(); tb1 = new
+		 * ToggleButton("Yes"); tb1.setToggleGroup(group);
+		 * tb1.setUserData("Yes"); toggle.getChildren().add(tb1);
+		 * 
+		 * tb2 = new ToggleButton("No"); tb2.setToggleGroup(group);
+		 * tb2.setUserData("No"); toggle.getChildren().add(tb2); add(toggle, 1,
+		 * 3, 1, 1); LAnwser.setVisible(false); toggle.setVisible(false);
+		 */
 
 		Pane addRemove = new HBox();
 		btnAdd = new Button("add");
 		btnAdd.setOnAction(new AddStatementListener());
 		addRemove.getChildren().add(btnAdd);
-		
+
 		btnRemove = new Button("remove");
 		btnRemove.setOnAction(new RemoveStatementListener());
 		addRemove.getChildren().add(btnRemove);
 		add(addRemove, 1, 9, 2, 1);
-		//btnAdd.setVisible(false);
-		//btnRemove.setVisible(false);
-		
+		// btnAdd.setVisible(false);
+		// btnRemove.setVisible(false);
+
 		ObservableList<String> options = FXCollections.observableArrayList();
 
 		for (String s : controller.getCategoriesTitle()) {
@@ -165,43 +154,29 @@ public class QuestionDetailPane extends GridPane {
 		}
 	}
 
-	/*class addStatementsArea implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent arg0) {
-			statementsArea.clear();
-			statements.clear();
-			i = 0;
-			LAnwser.setVisible(false);
-			toggle.setVisible(false);
-			Lstatement.setVisible(true);
-			statementField.setVisible(true);
-			LstatementsArea.setVisible(true);
-			statementsArea.setVisible(true);
-			btnAdd.setVisible(true);
-			btnRemove.setVisible(true);
-
-		}
-	}
-
-	class clearStatementArea implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent arg0) {
-			statementsArea.clear();
-			statements.clear();
-			i = 0;
-			LAnwser.setVisible(true);
-			toggle.setVisible(true);
-			Lstatement.setVisible(false);
-			statementField.setVisible(false);
-			LstatementsArea.setVisible(false);
-			statementsArea.setVisible(false);
-			btnAdd.setVisible(false);
-			btnRemove.setVisible(false);
-
-		}
-	}*/
+	/*
+	 * class addStatementsArea implements EventHandler<ActionEvent> {
+	 * 
+	 * @Override public void handle(ActionEvent arg0) { statementsArea.clear();
+	 * statements.clear(); i = 0; LAnwser.setVisible(false);
+	 * toggle.setVisible(false); Lstatement.setVisible(true);
+	 * statementField.setVisible(true); LstatementsArea.setVisible(true);
+	 * statementsArea.setVisible(true); btnAdd.setVisible(true);
+	 * btnRemove.setVisible(true);
+	 * 
+	 * } }
+	 * 
+	 * class clearStatementArea implements EventHandler<ActionEvent> {
+	 * 
+	 * @Override public void handle(ActionEvent arg0) { statementsArea.clear();
+	 * statements.clear(); i = 0; LAnwser.setVisible(true);
+	 * toggle.setVisible(true); Lstatement.setVisible(false);
+	 * statementField.setVisible(false); LstatementsArea.setVisible(false);
+	 * statementsArea.setVisible(false); btnAdd.setVisible(false);
+	 * btnRemove.setVisible(false);
+	 * 
+	 * } }
+	 */
 
 	public void setEditAction(EventHandler<ActionEvent> editAction) {
 		btnEdit.setOnAction(editAction);
@@ -267,13 +242,15 @@ public class QuestionDetailPane extends GridPane {
 		public void handle(ActionEvent arg0) {
 			String statement = statementField.getText();
 			try {
-				if (statements.size() < 5) {
-					statements.add(statement);
-					String s = statements.get(i);
-					int j = i + 1;
-					statementsArea.appendText(j + ". " + s + "." + "\n");
-					i++;
+				if (!statement.isEmpty()) {
+					if (statements.size() < 5) {
+						statements.add(statement);
+						String s = statements.get(i);
+						int j = i + 1;
+						statementsArea.appendText(j + ". " + s + "." + "\n");
+						i++;
 
+					}
 				}
 			} catch (Exception e) {
 				Scene scene = new Scene(new GridPane());

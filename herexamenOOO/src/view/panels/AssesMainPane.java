@@ -12,7 +12,7 @@ public class AssesMainPane extends BorderPane {
 
 	public AssesMainPane(Pane messagePane, Pane categoryOverviewPanel, Pane questionOverviewPanel){
 	    TabPane tabPane = new TabPane();
-	    
+	   
 	    FlowPane messageBox = new FlowPane(messagePane);
         	messageBox.setAlignment(Pos.CENTER);
         Tab testTab = new Tab("Test", messageBox);

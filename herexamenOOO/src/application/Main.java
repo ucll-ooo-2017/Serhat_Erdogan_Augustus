@@ -7,8 +7,10 @@ import handler.StartTestHandler;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import view.panels.AssesMainPane;
 import view.panels.CategoryOverviewPane;
 import view.panels.MessagePane;
@@ -22,14 +24,13 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			Controller controller =  Controller.getInstance();
 			
 			categoryOverviewPanel = CategoryOverviewPane.getInstance();
 			questionOverviewPane = QuestionOverviewPane.getInstance();
 			messagePane = MessagePane.getInstance();
 
 			Group root = new Group();
-			Scene scene = new Scene(root, 750, 400);
+			Scene scene = new Scene(root, 750, 500);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPanel, questionOverviewPane);
@@ -39,7 +40,7 @@ public class Main extends Application {
 			root.getChildren().add(borderPane);
 			primaryStage.setScene(scene);
 			primaryStage.sizeToScene();
-
+			primaryStage.getIcons().add( new Image("windowLogo.png"));
 			primaryStage.show();
 
 			categoryOverviewPanel.setNewAction(new CreateCategoryHandler());

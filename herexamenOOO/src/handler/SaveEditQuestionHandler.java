@@ -35,6 +35,9 @@ public class SaveEditQuestionHandler implements EventHandler<ActionEvent> {
 			String categorie = (String) questionDetailPane.getCategory();
 			String feedback = questionDetailPane.getFeedback();
 			ArrayList<String> statements = questionDetailPane.getStatements();
+			if(statements.size()<2){
+				throw new IllegalArgumentException("There has to be atleast 2 statements!");
+			}
 			System.out.println("question: " +question +"  statements: "+ statements);
 			controller.editQuestion(oldQuestion,question,answer, statements, categorie, feedback);
 			stage.close();

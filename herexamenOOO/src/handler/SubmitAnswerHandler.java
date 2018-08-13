@@ -6,9 +6,14 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import view.panels.TestPane;
 
@@ -33,17 +38,35 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 			if (controller.getScore().isLastQuestion()) {
 				stage.close();
 				controller.getEvaluation().setProperty("test", "true");
+				Stage stage = new Stage();
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Resultaat");
 				alert.setHeaderText("This is your result!");
 				alert.setContentText(controller.getScore().toString());
-				alert.showAndWait();
+				Image image = new  Image("ucllSmall.jpg");
+				ImageView imageView = new ImageView(image);
+				alert.setGraphic(imageView);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());
+				stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				alert.getDialogPane().getScene().setFill(Color.TRANSPARENT);
+				stage.initStyle(StageStyle.TRANSPARENT);
+				stage.showAndWait();
+
 				if (!alert.getContentText().equals("Beautiful! Everything is Perfect!")) {
+					
 					Alert feedback = new Alert(AlertType.INFORMATION);
 					feedback.setTitle("Feedback");
 					feedback.setHeaderText("This is your feedback!");
 					feedback.setContentText(controller.getScore().toStringFeedback());
-					feedback.showAndWait();
+					feedback.setGraphic(imageView);
+					DialogPane dialogPane2 = feedback.getDialogPane();
+					dialogPane2.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());
+					stage = (Stage) feedback.getDialogPane().getScene().getWindow();
+					feedback.getDialogPane().getScene().setFill(Color.TRANSPARENT);
+					stage.initStyle(StageStyle.TRANSPARENT);
+					stage.showAndWait();
 				}
 				controller.setQuestionNumberNul();
 			} else {
@@ -54,6 +77,8 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 				pane.setCenter(testPane);
 				Scene scene = new Scene(pane);
 				scene.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());
+				scene.setFill(Color.TRANSPARENT);
+				stage.initStyle(StageStyle.TRANSPARENT);
 				stage.setScene(scene);
 				stage.show();
 				testPane.setProcessAnswerAction(new SubmitAnswerHandler(testPane, stage));
