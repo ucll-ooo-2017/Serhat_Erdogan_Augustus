@@ -1,0 +1,21 @@
+#testTitle {
+	-fx-font-size: 20.0;
+	-fx-font-weight: bold;
+	-fx-alignment: center ;
+    -fx-padding: 10.0;
+}
+
+#radioButton{
+		-fx-font-size: 13.0;
+	
+	    -fx-padding: 2.0;
+	
+}
+#questionNumber{
+    -fx-padding: 5.0;
+    	-fx-font-size: 15.0;
+    		-fx-font-weight: bold;
+    	
+    
+	
+}

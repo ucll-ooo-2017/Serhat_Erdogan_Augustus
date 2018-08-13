@@ -1,4 +1,4 @@
-package strategyQuestion;
+package model.strategyQuestion;
 
 public class MultipleChoiceQuestion {
 

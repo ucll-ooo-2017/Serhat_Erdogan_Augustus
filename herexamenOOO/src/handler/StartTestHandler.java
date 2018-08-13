@@ -25,7 +25,7 @@ public class StartTestHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		controller.setQuestionNumberNul();
-		testPane = new TestPane(controller);
+		testPane = new TestPane();
 		if (controller.getQuestions().isEmpty()) {
 			Scene scene = new Scene(new GridPane());
 			showAlert(Alert.AlertType.ERROR, scene.getWindow(), "Form Error!", "There are no question! Try to make questions first before taking the test...");
@@ -35,6 +35,7 @@ public class StartTestHandler implements EventHandler<ActionEvent> {
 			BorderPane pane = new BorderPane();
 			pane.setCenter(testPane);
 			Scene scene = new Scene(pane);
+			scene.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 			testPane.setProcessAnswerAction(new SubmitAnswerHandler(testPane,stage));

@@ -35,11 +35,13 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 				controller.getEvaluation().setProperty("test", "true");
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Resultaat");
+				alert.setHeaderText("This is your result!");
 				alert.setContentText(controller.getScore().toString());
 				alert.showAndWait();
 				if (!alert.getContentText().equals("Beautiful! Everything is Perfect!")) {
 					Alert feedback = new Alert(AlertType.INFORMATION);
 					feedback.setTitle("Feedback");
+					feedback.setHeaderText("This is your feedback!");
 					feedback.setContentText(controller.getScore().toStringFeedback());
 					feedback.showAndWait();
 				}
@@ -48,9 +50,10 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 				stage.close();
 				Stage stage = new Stage();
 				BorderPane pane = new BorderPane();
-				TestPane testPane = new TestPane(controller);
+				TestPane testPane = new TestPane();
 				pane.setCenter(testPane);
 				Scene scene = new Scene(pane);
+				scene.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());
 				stage.setScene(scene);
 				stage.show();
 				testPane.setProcessAnswerAction(new SubmitAnswerHandler(testPane, stage));

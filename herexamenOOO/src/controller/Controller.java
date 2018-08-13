@@ -37,9 +37,9 @@ public class Controller implements Observer {
 		statements.add("Gewoon");
 		statements.add("zwijg");
 		statements.add("geen idee");
-		Question question1 = new Question("Waarom ben ik hier?", "Daarom", statements, "Java", "Zwijg gwn");
-		Question question2 = new Question("Hoe oud ben je?", "Daarom", statements, "Java", "Zwijg gwn");
-		Question question3 = new Question("hoe laat is het?", "Daarom", statements, "Java", "Zwijg gwn");
+		Question question1 = new Question("Waarom ben ik hier?", "Daarom", statements, "Java", "Het juiste antwoord is Daarom");
+		Question question2 = new Question("Hoe oud ben je?", "Daarom", statements, "Java", "Het juiste antwoord is Daarom");
+		Question question3 = new Question("hoe laat is het?", "Daarom", statements, "Java", "Het juiste antwoord is Daarom");
 		service.addCategory(cat1);
 		service.addCategory(cat2);
 		service.addQuestion(question1);
@@ -141,6 +141,9 @@ public class Controller implements Observer {
 
 	public void setQuestionNumberNul() {
 		this.questionNumber = 0;
+	}
+	public int getQuestionNumber(){
+		return this.questionNumber;
 	}
 
 	public String getNextQuestion() {

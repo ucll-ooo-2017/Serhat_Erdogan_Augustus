@@ -61,6 +61,7 @@ public class MessagePane extends GridPane {
 			l.setText("You never did this Test!");
 
 		} else {
+			
 			l.setText("You already did this Test!");
 
 		}
