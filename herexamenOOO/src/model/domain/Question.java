@@ -11,7 +11,7 @@ public class Question  {
 	private ArrayList<String> Statements = new ArrayList<>();
 	private String category;
 	private String feedback;
-	private QuestionType questionType;
+	public QuestionType questionType;
 
 	public Question(String question,String correctStatement, ArrayList<String> statements, String category, String feedback) {
 		setQuestion(question);

@@ -10,8 +10,10 @@ import javafx.collections.ObservableList;
 
 import model.domain.Category;
 import model.domain.Evaluation;
+import model.domain.MultipleChoiceQuestion;
 import model.domain.Question;
 import model.domain.Score;
+import model.domain.YesNoQuestion;
 import model.facade.Service;
 import view.panels.CategoryOverviewPane;
 import view.panels.MessagePane;
@@ -38,9 +40,13 @@ public class Controller implements Observer {
 		statements.add("fout");
 		statements.add("fout");
 		statements.add("fout");
-		Question question1 = new Question("Welke patroon definieert een familie van algoritmes, kapselt ze in een en maakt ze verwisselbaar?", "juist", statements, "Java", "Het juiste antwoord is juist");
-		Question question2 = new Question("Welk ontwerp principe is het minst van toepassing op het strategy?", "juist", statements, "Java", "Het juiste antwoord is juist");
-		Question question3 = new Question("hoe laat is het?", "juist", statements, "Java", "Het juiste antwoord is juist");
+		Question question1 = new Question(
+				"Welke patroon definieert een familie van algoritmes, kapselt ze in een en maakt ze verwisselbaar?",
+				"juist", statements, "Java", "Het juiste antwoord is juist");
+		Question question2 = new Question("Welk ontwerp principe is het minst van toepassing op het strategy?", "juist",
+				statements, "Java", "Het juiste antwoord is juist");
+		Question question3 = new Question("hoe laat is het?", "juist", statements, "Java",
+				"Het juiste antwoord is juist");
 		service.addCategory(cat1);
 		service.addCategory(cat2);
 		service.addQuestion(question1);
@@ -115,9 +121,17 @@ public class Controller implements Observer {
 	// questionController
 	public void addQuestion(String question, String correctStatement, ArrayList<String> answers, String category,
 			String feedback) {
-		Question ques = new Question(question, correctStatement, answers, category, feedback);
-		refreshTable = true;
+		Question ques = null;
+		if (answers.size() > 2) {
+			 ques = new MultipleChoiceQuestion(question, correctStatement, answers, category, feedback);
+
+		} else {
+			 ques = new YesNoQuestion(question, correctStatement, answers, category, feedback);
+
+		}
+		this.refreshTable = true;
 		service.addQuestion(ques);
+
 	}
 
 	public Question getQuestion(String title) {
@@ -143,7 +157,8 @@ public class Controller implements Observer {
 	public void setQuestionNumberNul() {
 		this.questionNumber = 0;
 	}
-	public int getQuestionNumber(){
+
+	public int getQuestionNumber() {
 		return this.questionNumber;
 	}
 
@@ -192,7 +207,9 @@ public class Controller implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
+
 		if (this.refreshTable) {
+			System.out.println("ik ben hier");
 			CategoryOverviewPane.getInstance().refreshTable();
 			QuestionOverviewPane.getInstance().refreshTable();
 			refreshTable = false;

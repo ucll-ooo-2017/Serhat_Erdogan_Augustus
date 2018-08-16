@@ -58,7 +58,7 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 					
 					Alert feedback = new Alert(AlertType.INFORMATION);
 					feedback.setTitle("Feedback");
-					feedback.setHeaderText("This is your feedback!");
+					feedback.setHeaderText("Feedback");
 					feedback.setContentText(controller.getScore().toStringFeedback());
 					feedback.setGraphic(imageView);
 					DialogPane dialogPane2 = feedback.getDialogPane();
