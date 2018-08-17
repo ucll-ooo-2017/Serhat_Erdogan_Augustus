@@ -33,7 +33,7 @@ public class Controller implements Observer {
 		testDone = false;
 		service = new Service();
 		service.addObserver(this);
-
+/*
 		Category cat1 = new Category("Design principles", "The SOLID design principles.", true);
 		Category cat2 = new Category("Java", "java extra's.", true);
 		ArrayList<String> statements = new ArrayList<>();
@@ -53,7 +53,7 @@ public class Controller implements Observer {
 		service.addCategory(cat2);
 		service.addQuestion(question1);
 		service.addQuestion(question2);
-		service.addQuestion(question3);
+		service.addQuestion(question3);*/
 	}
 
 	public static Controller getInstance() {

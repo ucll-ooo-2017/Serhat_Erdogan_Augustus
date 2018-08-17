@@ -72,7 +72,7 @@ public class MessagePane extends GridPane {
 			l.setText("You already did this Test!");
 
 		}
-		if (controller.getQuestionNumber() == controller.getQuestions().size()) {
+		if (controller.getQuestions().size() > 0 && controller.getQuestionNumber() == controller.getQuestions().size()) {
 			if (controller.getEvaluation().getPropValue("feedbackType").equals("score")) {
 					l.setText(controller.getScoreFeedback().toString());	
 					controller.getEvaluation().setProperty("feedbackType", "score");

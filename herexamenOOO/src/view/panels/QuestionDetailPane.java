@@ -193,11 +193,20 @@ public class QuestionDetailPane extends GridPane {
 	}
 
 	public String getQuestion() {
-		return questionField.getText();
+		if (!questionField.getText().isEmpty()) {
+			return questionField.getText();
+		} else {
+			throw new IllegalArgumentException("Question field can not be empty!");
+
+		}
 	}
 
 	public String getStatement() {
-		return statements.get(0);
+		if (statements.size() > 0) {
+			return statements.get(0);
+		} else {
+			throw new IllegalArgumentException("There has to be atleast 2 statements!");
+		}
 	}
 
 	public Object getCategory() {

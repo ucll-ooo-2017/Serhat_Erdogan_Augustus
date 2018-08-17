@@ -34,9 +34,9 @@ public class SaveQuestionHandler implements EventHandler<ActionEvent> {
 		try {
 			String question = questionDetailPane.getQuestion();
 			String answer = questionDetailPane.getStatement();
+			ArrayList<String> statements = questionDetailPane.getStatements();
 			String categorie = (String) questionDetailPane.getCategory();
 			String feedback = questionDetailPane.getFeedback();
-			ArrayList<String> statements = questionDetailPane.getStatements();
 
 			if(statements.size()<2){
 				throw new IllegalArgumentException("There has to be atleast 2 statements!");
@@ -51,6 +51,7 @@ public class SaveQuestionHandler implements EventHandler<ActionEvent> {
 		
 	}
 	private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);
 		alert.setHeaderText(null);
