@@ -204,20 +204,22 @@ public class Controller implements Observer {
 		testDone = true;
 		return service.getScore();
 	}
+	public Score getScoreFeedback() {
+		return service.getScore();
+	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 
 		if (this.refreshTable) {
-			System.out.println("ik ben hier");
 			CategoryOverviewPane.getInstance().refreshTable();
 			QuestionOverviewPane.getInstance().refreshTable();
 			refreshTable = false;
 		}
 		if (this.testDone) {
 			try {
-				MessagePane.getInstance().showEvaluation();
 				this.testDone = false;
+				MessagePane.getInstance().showEvaluation();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

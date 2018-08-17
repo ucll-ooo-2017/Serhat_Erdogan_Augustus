@@ -35,7 +35,7 @@ public class MessagePane extends GridPane {
 		this.setHgap(5);
 
 		this.setId("messagePane");
-		
+
 		testButton = new Button("Evaluate");
 		testButton.setId("new");
 		add(testButton, 0, 1, 1, 1);
@@ -43,7 +43,7 @@ public class MessagePane extends GridPane {
 		this.showEvaluation();
 		add(l, 0, 0, 1, 1);
 		setHalignment(testButton, HPos.CENTER);
-	
+
 	}
 
 	public static MessagePane getInstance() throws IOException {
@@ -65,10 +65,22 @@ public class MessagePane extends GridPane {
 		if (controller.getEvaluation().getPropValue("test").equals("false")) {
 			l.setText("You never did this Test!");
 
-		} else {
-			
+		}
+		if (controller.getEvaluation().getPropValue("test").equals("true")) {
 			l.setText("You already did this Test!");
 
+		}
+		if (controller.getQuestionNumber() == controller.getQuestions().size()) {
+			if (controller.getEvaluation().getPropValue("feedbackType").equals("score")) {
+					l.setText(controller.getScoreFeedback().toString());	
+					controller.getEvaluation().setProperty("feedbackType", "score");
+			}
+			if (controller.getEvaluation().getPropValue("feedbackType").equals("feedback")) {
+					l.setText(controller.getScoreFeedback().toStringFeedback());
+					controller.getEvaluation().setProperty("feedbackType", "feedback");
+
+				}
+			
 		}
 	}
 

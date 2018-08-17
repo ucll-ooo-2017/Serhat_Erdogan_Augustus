@@ -33,12 +33,12 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 
 		try {
+			System.out.println(testpane.getAnwser());
 			controller.getScore().controlAnwser(testpane.getAnwser());
-
 			if (controller.getScore().isLastQuestion()) {
 				stage.close();
 				controller.getEvaluation().setProperty("test", "true");
-				Stage stage = new Stage();
+				/*Stage stage = new Stage();
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Resultaat");
@@ -59,7 +59,7 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 					Alert feedback = new Alert(AlertType.INFORMATION);
 					feedback.setTitle("Feedback");
 					feedback.setHeaderText("Feedback");
-					feedback.setContentText(controller.getEvaluation().getPropValue("feedback")+ "\n\n"+controller.getScore().toStringFeedback());
+					feedback.setContentText(controller.getScore().toStringFeedback());
 					feedback.setGraphic(imageView);
 					DialogPane dialogPane2 = feedback.getDialogPane();
 					dialogPane2.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());
@@ -67,7 +67,7 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 					feedback.getDialogPane().getScene().setFill(Color.TRANSPARENT);
 					stage.initStyle(StageStyle.TRANSPARENT);
 					stage.showAndWait();
-				}
+				}*/
 				controller.setQuestionNumberNul();
 			} else {
 				stage.close();
