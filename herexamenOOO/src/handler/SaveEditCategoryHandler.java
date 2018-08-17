@@ -28,10 +28,11 @@ public class SaveEditCategoryHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		try {
 			String oldTitle = categoryDetailPane.getOldTitle();
+			String oldDescription = categoryDetailPane.getOldDescription();
 			String title = categoryDetailPane.getTitle();
 			String description = categoryDetailPane.getDescription();
 			Boolean mainCategory = categoryDetailPane.isMainCategory();
-			controller.editCategory(oldTitle, title, description, mainCategory);
+			controller.editCategory(oldTitle,oldDescription, title, description, mainCategory);
 			controller.changeQuestionCategory(oldTitle, title);
 			stage.close();
 			//categoryOverviewPane.refreshTable();

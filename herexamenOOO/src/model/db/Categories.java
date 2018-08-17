@@ -18,21 +18,26 @@ public class Categories {
 			throw new DbException("The categorie can not be null!");
 		} else {
 			for (Category cat : this.categories) {
-				if (cat.getTitle().equals(categorie.getTitle())
-						&& cat.getDescription().equals(categorie.getDescription())) {
-					throw new DbException("This categorie already exist!");
+				if (cat.getTitle().equalsIgnoreCase(categorie.getTitle())) {
+					throw new DbException("The categorie name is already used!");
 				}
 			}
 		}
 		this.categories.add(categorie);
 	}
 
-	public void EditCategorie(String oldName, Category category) {
+	public void EditCategorie(String oldName,String oldDescription, Category category) {
 		if (category == null) {
 			throw new DbException("The categorie can not be null!");
 		} else {
 			for (int i=0;i < this.categories.size(); i++) {
-				if (categories.get(i).getTitle().equals(oldName)) {
+				if (categories.get(i).getTitle().equals(oldName) && categories.get(i).getDescription().equals(oldDescription)) {
+					
+					for (Category cat : this.categories) {
+						if (cat.getTitle().equalsIgnoreCase(category.getTitle())) {
+							throw new DbException("The categorie name is already used!");
+						}
+					}
 					categories.remove(i);
 					categories.add(i, category);
 				}

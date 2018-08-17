@@ -45,7 +45,7 @@ public class CategoryOverviewPane extends GridPane {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 1 && (!row.isEmpty())) {
 					Category data = row.getItem();
-					CategoryDetailPane detailPane = new CategoryDetailPane(data.getTitle());
+					CategoryDetailPane detailPane = new CategoryDetailPane(data.getTitle(),data.getDescription());
 					this.handler = new EditCategoryHandler(detailPane);
 					this.handler.open();
 				}

@@ -33,7 +33,6 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 
 		try {
-			System.out.println(testpane.getAnwser());
 			controller.getScore().controlAnwser(testpane.getAnwser());
 			if (controller.getScore().isLastQuestion()) {
 				stage.close();

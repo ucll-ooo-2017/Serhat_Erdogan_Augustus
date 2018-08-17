@@ -27,8 +27,8 @@ public class Service extends Observable{
 		this.setChanged();
 		this.notifyObservers(this);
 	}
-	public void editCategory(String oldName, Category categorie){
-		this.categories.EditCategorie(oldName,categorie);
+	public void editCategory(String oldName,String oldDescription, Category categorie){
+		this.categories.EditCategorie(oldName,oldDescription,categorie);
 		this.setChanged();
 		this.notifyObservers(this);
 	}

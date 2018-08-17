@@ -16,13 +16,15 @@ public class CategoryDetailPane extends GridPane {
 	private ComboBox<String> categoryField;
 	private Controller controller = Controller.getInstance();
 	private String catTitle;
+	private String catDescription;
 
 	public CategoryDetailPane() {
 		this.screen();
 	}
 
-	public CategoryDetailPane(String title) {
+	public CategoryDetailPane(String title,String description) {
 		catTitle = title;
+		catDescription = description;
 		this.screen();
 	}
 
@@ -106,6 +108,9 @@ public class CategoryDetailPane extends GridPane {
 
 	public String getOldTitle() {
 		return catTitle;
+	}
+	public String getOldDescription() {
+		return catDescription;
 	}
 
 }

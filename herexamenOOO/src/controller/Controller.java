@@ -75,10 +75,10 @@ public class Controller implements Observer {
 		this.service.addCategory(categorie);
 	}
 
-	public void editCategory(String oldName, String newName, String description, boolean mainCategorie) {
+	public void editCategory(String oldName,String oldDescription, String newName, String description, boolean mainCategorie) {
 		Category categorie = new Category(newName, description, mainCategorie);
 		refreshTable = true;
-		this.service.editCategory(oldName, categorie);
+		this.service.editCategory(oldName,oldDescription, categorie);
 
 	}
 
