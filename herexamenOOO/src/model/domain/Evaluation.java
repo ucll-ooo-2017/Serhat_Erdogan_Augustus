@@ -1,3 +1,5 @@
+//@author Serhat Erdogan
+
 package model.domain;
 
 import java.io.FileInputStream;

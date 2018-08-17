@@ -1,3 +1,5 @@
+//@author Serhat Erdogan
+
 package application;
 
 import controller.Controller;

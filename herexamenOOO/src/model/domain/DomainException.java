@@ -1,3 +1,5 @@
+//@author Serhat Erdogan
+
 package model.domain;
 
 public class DomainException extends RuntimeException {

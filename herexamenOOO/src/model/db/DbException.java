@@ -1,3 +1,5 @@
+//@author Serhat Erdogan
+
 package model.db;
 
 public class DbException extends RuntimeException {

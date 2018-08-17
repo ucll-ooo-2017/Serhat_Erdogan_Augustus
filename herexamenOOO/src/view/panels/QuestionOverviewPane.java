@@ -1,3 +1,4 @@
+//@author Serhat Erdogan
 package view.panels;
 
 import controller.Controller;
