@@ -55,11 +55,11 @@ public class SubmitAnswerHandler implements EventHandler<ActionEvent> {
 				stage.showAndWait();
 
 				if (!alert.getContentText().equals("Beautiful! Everything is Perfect!")) {
-					
+
 					Alert feedback = new Alert(AlertType.INFORMATION);
 					feedback.setTitle("Feedback");
 					feedback.setHeaderText("Feedback");
-					feedback.setContentText(controller.getScore().toStringFeedback());
+					feedback.setContentText(controller.getEvaluation().getPropValue("feedback")+ "\n\n"+controller.getScore().toStringFeedback());
 					feedback.setGraphic(imageView);
 					DialogPane dialogPane2 = feedback.getDialogPane();
 					dialogPane2.getStylesheets().add(getClass().getResource("TestPane.css").toExternalForm());

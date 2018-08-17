@@ -48,6 +48,7 @@ public class Evaluation {
 
 			outputStream = new FileOutputStream("evaluation.properties");
 			prop.setProperty("test", prop2.getProperty("test"));
+			prop.setProperty("feedback", prop2.getProperty("feedback"));
 			prop.setProperty(propName, propValue);
 			prop.store(outputStream, null);
 
@@ -63,5 +64,6 @@ public class Evaluation {
 		}
 
 	}
+	
 
 }
